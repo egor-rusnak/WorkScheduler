@@ -8,8 +8,7 @@ var providerServices = builder.Services;
 
 providerServices.AddControllers();
 providerServices.AddSwagger();
-
-
+providerServices.AddAngularCors();
 
 var app = builder.Build();
 
@@ -21,9 +20,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors();
 app.UseMiddleware<GenericExceptionHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+
 app.Run();
