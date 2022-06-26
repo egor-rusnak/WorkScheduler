@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SampleService } from '@core/services/sample/sample.service';
-import { delay, interval } from 'rxjs';
+import { delay } from 'rxjs';
 
 @Component({
 	selector: 'app-main',

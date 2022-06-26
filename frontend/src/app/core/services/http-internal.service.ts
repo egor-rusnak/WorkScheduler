@@ -9,22 +9,6 @@ export class HttpInternalService {
 
 	constructor(protected http: HttpClient) {}
 
-	protected getHeaders(): HttpHeaders {
-		return this.headers;
-	}
-
-	protected getHeader(key: string): string | null {
-		return this.headers.get(key);
-	}
-
-	protected setHeader(key: string, value: string): void {
-		this.headers = this.headers.set(key, value);
-	}
-
-	protected deleteHeader(key: string): void {
-		this.headers = this.headers.delete(key);
-	}
-
 	public getRequestString(url: string, httpParams?: any): Observable<any> {
 		return this.http.get(this.buildUrl(url), {
 			headers: this.getHeaders(),
@@ -77,5 +61,21 @@ export class HttpInternalService {
 
 	protected buildUrl(url: string): string {
 		return environment.baseUrl + '/' + url;
+	}
+
+	protected getHeaders(): HttpHeaders {
+		return this.headers;
+	}
+
+	protected getHeader(key: string): string | null {
+		return this.headers.get(key);
+	}
+
+	protected setHeader(key: string, value: string): void {
+		this.headers = this.headers.set(key, value);
+	}
+
+	protected deleteHeader(key: string): void {
+		this.headers = this.headers.delete(key);
 	}
 }
