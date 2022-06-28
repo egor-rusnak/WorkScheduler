@@ -1,6 +1,8 @@
 ﻿namespace WorkScheduler.API.Models
 {
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
+    using WorkScheduler.API.Models.Abstract;
 
     public class WorkSchedulerContext : DbContext
     {
@@ -11,6 +13,16 @@
         {
             Database.EnsureDeleted();
             Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOne(e => e.CreatedBy)
+                .WithOne()
+                .OnDelete(DeleteBehavior.ClientCascade);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     using WorkScheduler.API.Models.Abstract;
 
-    public class Phone : Entity
+    public class Phone : EntityAudit
     {
         public string Number { get; set; }
     }

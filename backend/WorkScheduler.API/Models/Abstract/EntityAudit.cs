@@ -4,10 +4,10 @@
     {
         public EntityAudit()
         {
-            RegistrationDate = DateTimeOffset.UtcNow;
+            CreatedDate = DateTimeOffset.UtcNow;
         }
 
-        public DateTimeOffset RegistrationDate { get; set; }
         public User CreatedBy { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
     }
 }
