@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { HttpInternalService } from '@core/services/http-internal.service';
 import { Injectable } from '@angular/core';
 
