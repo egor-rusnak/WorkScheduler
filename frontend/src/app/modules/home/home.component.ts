@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 	styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+	name: 'sdfs';
+
 	constructor() {}
 
 	ngOnInit(): void {}

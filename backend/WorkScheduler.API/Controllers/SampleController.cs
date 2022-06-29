@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WorkScheduler.API.Models;
+using WorkScheduler.API.Services;
 
 namespace WorkScheduler.API.Controllers
 {
     public class SampleController : Controller
     {
-        public SampleController(WorkSchedulerContext workSchedulerContext)
+        public SampleController(UserService userService)
         {
         }
 

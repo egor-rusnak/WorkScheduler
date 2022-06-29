@@ -2,6 +2,7 @@
 using WorkScheduler.API.Extensions;
 using WorkScheduler.API.Middlewares;
 using WorkScheduler.API.Models;
+using WorkScheduler.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var providerServices = builder.Services;
@@ -14,6 +15,7 @@ providerServices.AddAngularCors();
 providerServices.AddDbContext<WorkSchedulerContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+providerServices.AddTransient<UserService>();
 
 var app = builder.Build();
 
