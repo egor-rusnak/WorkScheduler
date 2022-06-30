@@ -7,7 +7,7 @@
             CreatedDate = DateTimeOffset.UtcNow;
         }
 
-        public User CreatedBy { get; set; }
+        public User? CreatedBy { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
     }
 }

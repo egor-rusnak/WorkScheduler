@@ -11,7 +11,7 @@
 
         public WorkSchedulerContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -20,6 +20,12 @@
             modelBuilder.Entity<User>()
                 .HasOne(e => e.CreatedBy)
                 .WithOne()
+                .OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder
+                .Entity<Phone>()
+                .HasOne(e => e.User)
+                .WithMany()
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             base.OnModelCreating(modelBuilder);

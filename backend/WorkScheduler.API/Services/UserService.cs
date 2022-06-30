@@ -14,7 +14,12 @@
 
         public UserDto Create(UserDto userDto)
         {
-            throw new Exception();
+            var user = new User() { Name = userDto.Name, CreatedBy = null };
+            var phone = new Phone() { Number = userDto.Phone, User = user, CreatedBy = null };
+            user.Phones.Add(phone);
+            Context.Users.Add(user);
+            Context.SaveChanges();
+            return userDto;
         }
     }
 }
