@@ -1,11 +1,12 @@
-﻿namespace WorkScheduler.API.DTOs
-{
-    using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-    public class UserDto
+namespace WorkScheduler.Shared.DTOs
+{
+    public class CreateUserDto
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
         [JsonPropertyName("phone")]
         public string Phone { get; set; }
     }

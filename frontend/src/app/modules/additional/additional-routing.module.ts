@@ -5,10 +5,7 @@ import { ServiceEditListComponent } from './service-edit-list/service-edit-list.
 import { UserEditListComponent } from './user-edit-list/user-edit-list.component';
 
 const routes: Routes = [
-	{
-		path: '',
-		component: AdditionalComponent,
-	},
+	{ path: '', component: AdditionalComponent },
 	{ path: 'users', component: UserEditListComponent },
 	{ path: 'services', component: ServiceEditListComponent },
 ];

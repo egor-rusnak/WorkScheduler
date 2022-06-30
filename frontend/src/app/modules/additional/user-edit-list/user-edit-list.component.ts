@@ -63,7 +63,7 @@ export class UserEditListComponent implements OnInit {
 		console.log(model2);
 
 		this.client
-			.postRequest<UserDto>('SaveUser', model)
+			.postRequest<UserDto>('Users/Create', model)
 			.subscribe((result) => {
 				alert(result.name);
 			});
