@@ -8,11 +8,9 @@ const routes: Routes = [
 	{
 		path: '',
 		component: AdditionalComponent,
-		children: [
-			{ path: 'users', component: UserEditListComponent },
-			{ path: 'services', component: ServiceEditListComponent },
-		],
 	},
+	{ path: 'users', component: UserEditListComponent },
+	{ path: 'services', component: ServiceEditListComponent },
 ];
 
 @NgModule({
