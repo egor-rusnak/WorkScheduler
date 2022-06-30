@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'app-user-edit-list',
@@ -7,6 +8,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserEditListComponent implements OnInit {
+	form: FormGroup;
+
 	constructor() {}
 
 	ngOnInit(): void {}
