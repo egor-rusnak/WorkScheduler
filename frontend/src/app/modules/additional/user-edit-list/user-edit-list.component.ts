@@ -37,6 +37,7 @@ import { Router } from '@angular/router';
 })
 export class UserEditListComponent implements OnInit {
 	userInfoForm: FormGroup;
+	isAddMode: boolean = false;
 
 	dataSource = null;
 	columnsToDisplay = ['name', 'phone'];
@@ -116,17 +117,17 @@ export class UserEditListComponent implements OnInit {
 	@ViewChild('someBtn') elBtn: ElementRef;
 
 	touchmove(event: TouchEvent) {
-		event.preventDefault();
-		event.stopPropagation();
 		const touch = event.targetTouches[0];
-		this.el.nativeElement.style.marginTop =
+		this.el.nativeElement.style.top =
 			touch.pageY < this.minLineHeight
-				? this.el.nativeElement.style.marginTop
-				: touch.pageY - this.startPosition + 'px';
+				? this.el.nativeElement.style.top
+				: touch.pageY + 'px';
 		if (event.targetTouches[0].pageY > this.closeLineHeight) {
 			this.close(false);
 		}
 		this.endPosition = event.targetTouches[0].pageY;
+		// event.preventDefault();
+		event.stopPropagation();
 	}
 
 	closeLineHeight: number;
@@ -140,14 +141,18 @@ export class UserEditListComponent implements OnInit {
 		this.closeLineHeight =
 			(screen.height - this.startPosition) * 0.5 + this.startPosition;
 		this.minLineHeight = this.startPosition * 0.5;
+
+		this.elBtn.nativeElement.classList.add('simple-line-active');
 	}
 
 	touchend(event: TouchEvent) {
+		this.elBtn.nativeElement.classList.remove('simple-line-active');
+
 		if (this.endPosition > this.startPosition) {
-			this.el.nativeElement.style.marginTop = '';
+			this.el.nativeElement.style.top = '';
 		}
 		if (this.endPosition < this.closeLineHeight) {
-			this.el.nativeElement.style.marginTop = '';
+			this.el.nativeElement.style.top = '';
 		}
 	}
 }

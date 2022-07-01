@@ -4,17 +4,23 @@
 	class="form formClass slideUp"
 	novalidate
 >
-	<div class="input-fields">
-		<button
-			#someBtn
-			(touchmove)="touchmove($event)"
-			(touchend)="touchend($event)"
-			(touchstart)="touchstart($event)"
-			mat-raised-button
-			class="save-btn"
-		>
-			Touch me
-		</button>
+	<input
+		#someBtn
+		(touchmove)="touchmove($event)"
+		(touchend)="touchend($event)"
+		(touchstart)="touchstart($event)"
+		type="button"
+		class="simple-line"
+	/>
+	<button
+		*ngIf="!isAddMode"
+		(click)="isAddMode = true"
+		mat-raised-button
+		class="save-btn"
+	>
+		Add
+	</button>
+	<div *ngIf="isAddMode" class="input-fields fadeIn">
 		<mat-form-field class="example-full-width" appearance="fill">
 			<mat-label>Name</mat-label>
 			<input type="text" formControlName="Name" matInput />
@@ -33,7 +39,7 @@
 		<button (click)="saveUser()" mat-raised-button class="save-btn">
 			Save
 		</button>
-		<button (click)="close(true)" mat-raised-button class="save-btn">
+		<button (click)="isAddMode = false" mat-raised-button class="save-btn">
 			Back
 		</button>
 		<button (click)="show()" mat-raised-button class="save-btn">
