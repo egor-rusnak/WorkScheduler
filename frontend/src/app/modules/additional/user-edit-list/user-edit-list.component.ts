@@ -116,13 +116,13 @@ export class UserEditListComponent implements OnInit {
 	@ViewChild('someBtn') elBtn: ElementRef;
 
 	touchmove(event: TouchEvent) {
-		console.log(event.targetTouches[0].pageY);
+		event.preventDefault();
+		event.stopPropagation();
+		const touch = event.targetTouches[0];
 		this.el.nativeElement.style.marginTop =
-			event.targetTouches[0].pageY < this.minLineHeight
+			touch.pageY < this.minLineHeight
 				? this.el.nativeElement.style.marginTop
-				: event.targetTouches[0].pageY -
-				  event.targetTouches[0].clientX +
-				  'px';
+				: touch.pageY - this.startPosition + 'px';
 		if (event.targetTouches[0].pageY > this.closeLineHeight) {
 			this.close(false);
 		}
