@@ -10,4 +10,8 @@
     <PackageReference Include="FluentValidation" Version="11.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WorkScheduler.API.DAL\WorkScheduler.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

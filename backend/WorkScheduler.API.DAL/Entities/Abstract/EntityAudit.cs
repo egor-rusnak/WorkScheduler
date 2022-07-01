@@ -1,6 +1,6 @@
-﻿namespace WorkScheduler.DAL.Models.Abstract
+﻿namespace WorkScheduler.DAL.Entities.Abstract
 {
-    public class EntityAudit : Entity
+    public class EntityAudit : BaseEntity
     {
         public EntityAudit()
         {
@@ -8,8 +8,6 @@
         }
 
         public Guid? CreatedById { get; set; }
-
-        public DateTimeOffset CreatedOn { get; set; }
-
+        public DateTimeOffset CreatedOn { get; init; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using WorkScheduler.DAL;
+using WorkScheduler.DAL.Entities;
 using WorkScheduler.Shared.DTOs;
 
 namespace WorkScheduler.BLL.MappingProfiles

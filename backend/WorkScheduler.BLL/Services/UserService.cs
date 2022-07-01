@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using WorkScheduler.BLL.Services.Abstract;
-using WorkScheduler.DAL;
 using WorkScheduler.DAL.Context;
+using WorkScheduler.DAL.Entities;
 using WorkScheduler.Shared.DTOs;
 
 namespace WorkScheduler.BLL.Services

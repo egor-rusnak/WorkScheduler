@@ -1,13 +1,7 @@
-﻿namespace WorkScheduler.DAL.Models.Abstract
+﻿namespace WorkScheduler.DAL.Entities.Abstract
 {
-    public class Entity
+    public class Entity : BaseEntity
     {
-        public Entity()
-        {
-            Id = Guid.NewGuid();
-        }
-
-        public Guid Id { get; set; }
-
+        public string Name { get; set; }
     }
 }

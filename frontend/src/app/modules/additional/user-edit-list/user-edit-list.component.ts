@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	OnInit,
+	ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserDto } from '@core/models/user-dto';
 import {
@@ -8,9 +13,11 @@ import {
 	transition,
 	trigger,
 } from '@angular/animations';
+import { ElementRef } from '@angular/core';
 
 import { HttpInternalService } from '@core/services/http-internal.service';
 import { catchError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-user-edit-list',
@@ -36,7 +43,10 @@ export class UserEditListComponent implements OnInit {
 	columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
 	expandedElement: PeriodicElement | null;
 
-	constructor(protected client: HttpInternalService) {
+	constructor(
+		protected client: HttpInternalService,
+		protected router: Router
+	) {
 		this._createForm();
 	}
 
@@ -53,14 +63,10 @@ export class UserEditListComponent implements OnInit {
 		console.log('save');
 		const name = this.userInfoForm.get('Name').value;
 		const phone = this.userInfoForm.get('Phone').value;
-		console.log(name);
-		console.log(phone);
 		const model = new UserDto();
-		const model2 = { ...this.userInfoForm.value };
 		model.name = name;
 		model.phone = phone;
 		console.log(model);
-		console.log(model2);
 
 		this.client
 			.postRequest<UserDto>('Users/Create', model)
@@ -70,7 +76,79 @@ export class UserEditListComponent implements OnInit {
 	}
 
 	show() {
-		this.dataSource = [{ name: 'artem', phone: '23432423' }] as UserDto[];
+		this.dataSource = [
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+			{ name: 'artem', phone: '23432423' },
+		] as UserDto[];
+	}
+
+	close(withAnimation: boolean) {
+		this.el.nativeElement.classList.remove('slideUp');
+		if (withAnimation) {
+			this.el.nativeElement.classList.add('slideDown');
+			new Promise((resolve) => setTimeout(resolve, 400)).then(() =>
+				this.router.navigate(['../additional'])
+			);
+		} else {
+			this.router.navigate(['../additional']);
+		}
+	}
+
+	@ViewChild('someVar') el: ElementRef;
+	@ViewChild('someBtn') elBtn: ElementRef;
+
+	touchmove(event: TouchEvent) {
+		console.log(event.targetTouches[0].pageY);
+		this.el.nativeElement.style.marginTop =
+			event.targetTouches[0].pageY < this.minLineHeight
+				? this.el.nativeElement.style.marginTop
+				: event.targetTouches[0].pageY -
+				  event.targetTouches[0].clientX +
+				  'px';
+		if (event.targetTouches[0].pageY > this.closeLineHeight) {
+			this.close(false);
+		}
+		this.endPosition = event.targetTouches[0].pageY;
+	}
+
+	closeLineHeight: number;
+	minLineHeight: number;
+	endPosition: number;
+	startPosition: number;
+
+	touchstart(event: TouchEvent) {
+		console.log(`start:${event.targetTouches[0].pageY}`);
+		this.startPosition = event.targetTouches[0].pageY;
+		this.closeLineHeight =
+			(screen.height - this.startPosition) * 0.5 + this.startPosition;
+		this.minLineHeight = this.startPosition * 0.5;
+	}
+
+	touchend(event: TouchEvent) {
+		if (this.endPosition > this.startPosition) {
+			this.el.nativeElement.style.marginTop = '';
+		}
+		if (this.endPosition < this.closeLineHeight) {
+			this.el.nativeElement.style.marginTop = '';
+		}
 	}
 }
 

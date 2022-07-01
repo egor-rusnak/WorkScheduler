@@ -1,12 +1,9 @@
-﻿using WorkScheduler.DAL.Models.Abstract;
+﻿using WorkScheduler.DAL.Entities.Abstract;
 
-namespace WorkScheduler.DAL
+namespace WorkScheduler.DAL.Entities
 {
-    public class User : EntityAudit
+    public class User : EntityAuditWithName
     {
-        public string Name { get; set; }
-
         public ICollection<Phone> Phones { get; set; } = new List<Phone>();
-
     }
 }

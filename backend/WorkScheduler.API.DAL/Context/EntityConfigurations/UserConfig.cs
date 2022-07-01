@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using WorkScheduler.DAL;
+using WorkScheduler.DAL.Entities;
 
 namespace WorkScheduler.API.DAL.Context.EntityConfigurations
 {
