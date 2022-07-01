@@ -6,7 +6,7 @@ namespace WorkScheduler.API.Controllers
 {
     [ApiController()]
     [Route("[controller]/[action]")]
-    public class ServiceController : Controller
+    public class ServiceController : ControllerBase
     {
         private readonly IServiceService _serviceService;
 

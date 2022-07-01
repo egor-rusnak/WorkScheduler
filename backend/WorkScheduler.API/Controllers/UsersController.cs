@@ -6,7 +6,7 @@ namespace WorkScheduler.API.Controllers
 {
     [ApiController()]
     [Route("[controller]/[action]")]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
 
@@ -25,6 +25,13 @@ namespace WorkScheduler.API.Controllers
         public ActionResult<CreateUserDto> Create(CreateUserDto userDto)
         {
             return _userService.Create(userDto);
+        }
+
+        [HttpPost]
+        public ActionResult MarkAsEmployee(Guid userId)
+        {
+            _userService.MarkUserAsEmployer(userId);
+            return Ok();
         }
     }
 }
