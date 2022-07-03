@@ -1,11 +1,11 @@
 <form
-	#someVar
+	#slideElem
 	[formGroup]="userInfoForm"
-	class="form formClass slideUp"
+	class="form slide-block slideUp"
 	novalidate
 >
 	<input
-		#someBtn
+		#slideButton
 		(touchmove)="touchmove($event)"
 		(touchend)="touchend($event)"
 		(touchstart)="touchstart($event)"
@@ -20,12 +20,12 @@
 	>
 		Add
 	</button>
-	<div *ngIf="isAddMode" class="input-fields fadeIn">
-		<mat-form-field class="example-full-width" appearance="fill">
+	<div #someDiv *ngIf="isAddMode" class="input-fields" @pullDownAnimation>
+		<mat-form-field class="example-full-width" appearance="outline">
 			<mat-label>Name</mat-label>
 			<input type="text" formControlName="Name" matInput />
 		</mat-form-field>
-		<mat-form-field class="example-full-width" appearance="fill">
+		<mat-form-field class="example-full-width" appearance="outline">
 			<mat-label>Telephone</mat-label>
 			<span matPrefix>+380 &nbsp;</span>
 			<input
@@ -40,101 +40,38 @@
 			Save
 		</button>
 		<button (click)="isAddMode = false" mat-raised-button class="save-btn">
-			Back
-		</button>
-		<button (click)="show()" mat-raised-button class="save-btn">
-			Show
+			Close
 		</button>
 	</div>
-	<table
-		mat-table
-		[dataSource]="dataSource"
-		multiTemplateDataRows
-		class="mat-elevation-z8 mytable"
-	>
-		<ng-container
-			matColumnDef="{{ column }}"
-			*ngFor="let column of columnsToDisplay"
-		>
-			<th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-			<td mat-cell *matCellDef="let element">
-				{{ element[column] }}
-			</td>
-		</ng-container>
-		<ng-container matColumnDef="expand">
-			<th mat-header-cell *matHeaderCellDef aria-label="row actions">
-				&nbsp;
-			</th>
-			<td mat-cell *matCellDef="let element">
-				<button
-					mat-icon-button
-					aria-label="expand row"
-					(click)="
-						expandedElement =
-							expandedElement === element ? null : element;
-						$event.stopPropagation()
-					"
-				>
-					<mat-icon *ngIf="expandedElement !== element"
-						>keyboard_arrow_down</mat-icon
-					>
-					<mat-icon *ngIf="expandedElement === element"
-						>keyboard_arrow_up</mat-icon
-					>
-				</button>
-			</td>
-		</ng-container>
-
-		<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-		<ng-container matColumnDef="expandedDetail">
-			<td
-				mat-cell
-				*matCellDef="let element"
-				[attr.colspan]="columnsToDisplayWithExpand.length"
-			>
-				<div
-					class="example-element-detail"
-					[@detailExpand]="
-						element == expandedElement ? 'expanded' : 'collapsed'
-					"
-				>
-					<div class="example-element-diagram">
-						<div class="example-element-position">
-							{{ element.position }}
-						</div>
-						<div class="example-element-symbol">
-							{{ element.symbol }}
-						</div>
-						<div class="example-element-name">
-							{{ element.name }}
-						</div>
-						<div class="example-element-weight">
-							{{ element.weight }}
-						</div>
-					</div>
-					<div class="example-element-description">
-						{{ element.phone }}
-						<span class="example-element-description-attribution">
-						</span>
-					</div>
-				</div>
-			</td>
-		</ng-container>
-
-		<tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-		<tr
-			mat-row
-			*matRowDef="let element; columns: columnsToDisplayWithExpand"
-			class="example-element-row"
-			[class.example-expanded-row]="expandedElement === element"
-			(click)="
-				expandedElement = expandedElement === element ? null : element
-			"
-		></tr>
-		<tr
-			mat-row
-			*matRowDef="let row; columns: ['expandedDetail']"
-			class="example-detail-row"
-		></tr>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<td>Имя</td>
+				<td>Телефон</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let user of users">
+				<td>{{ user.name }}</td>
+				<td>{{ user.phone }}</td>
+				<td>
+					<input
+						type="button"
+						value="Изменить"
+						(click)="editUser(user)"
+						class="btn btn-default"
+					/>
+				</td>
+				<td>
+					<input
+						type="button"
+						value="Удалить"
+						class="btn btn-danger"
+					/>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 </form>

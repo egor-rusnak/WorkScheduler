@@ -1,13 +1,18 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	ComponentRef,
+	EventEmitter,
 	OnInit,
+	Output,
+	TemplateRef,
 	ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserDto } from '@core/models/user-dto';
 import {
 	animate,
+	keyframes,
 	state,
 	style,
 	transition,
@@ -16,13 +21,41 @@ import {
 import { ElementRef } from '@angular/core';
 
 import { HttpInternalService } from '@core/services/http-internal.service';
-import { catchError } from 'rxjs';
 import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
+import { BaseSlideDownComponent } from '@core/base/components/base-slide-down.component';
+
+export const pullDownAnimation = trigger('pullDownAnimation', [
+	transition(':enter', [
+		style({
+			transform: 'scaleY(0.1)',
+			transformOrigin: '50% 0%',
+		}),
+		animate(
+			'0.5s',
+			keyframes([
+				style({ transform: 'scaleY(0.1)' }),
+				style({ transform: 'scaleY(1.1)' }),
+				style({ transform: 'scaleY(1)' }),
+			])
+		),
+	]),
+	transition(':leave', [
+		style({
+			transform: 'scaleY(1)',
+			transformOrigin: '50% 0%',
+		}),
+		animate('0.3s', style({ transform: 'scaleY(0)' })),
+	]),
+]);
 
 @Component({
 	selector: 'app-user-edit-list',
 	templateUrl: './user-edit-list.component.html',
-	styleUrls: ['./user-edit-list.component.scss'],
+	styleUrls: [
+		'./user-edit-list.component.scss',
+		'../additional.component.scss',
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [
 		trigger('detailExpand', [
@@ -33,22 +66,31 @@ import { Router } from '@angular/router';
 				animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
 			),
 		]),
+		pullDownAnimation,
 	],
 })
-export class UserEditListComponent implements OnInit {
+export class UserEditListComponent
+	extends BaseSlideDownComponent
+	implements OnInit
+{
 	userInfoForm: FormGroup;
+	editedUser: UserDto | null = null;
+	public users: UserDto[];
 	isAddMode: boolean = false;
 
-	dataSource = null;
-	columnsToDisplay = ['name', 'phone'];
-	columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-	expandedElement: PeriodicElement | null;
+	@ViewChild('readOnlyTemplate', { static: false }) readOnlyTemplate:
+		| TemplateRef<any>
+		| undefined;
+
+	@Output() closeEmit = new EventEmitter();
+	@ViewChild('someDiv') elDiv: ElementRef;
 
 	constructor(
 		protected client: HttpInternalService,
-		protected router: Router
+		protected router: Router,
+		protected changeDetector: ChangeDetectorRef
 	) {
-		this._createForm();
+		super();
 	}
 
 	private _createForm() {
@@ -58,7 +100,23 @@ export class UserEditListComponent implements OnInit {
 		});
 	}
 
-	ngOnInit(): void {}
+	private _loadUsers() {
+		this.users = [...this.users, { name: 'Artrem', phone: '4234234' }];
+		// this.serv.getUsers().subscribe((data: Array<User>) => {
+		//         this.users = data;
+		//     });
+	}
+
+	ngOnInit(): void {
+		this._createForm();
+		this.users = [] as UserDto[];
+		this._loadUsers();
+		this.changeDetector.detectChanges();
+	}
+
+	closeEvent() {
+		this.closeEmit.emit(null);
+	}
 
 	saveUser() {
 		console.log('save');
@@ -76,88 +134,11 @@ export class UserEditListComponent implements OnInit {
 			});
 	}
 
-	show() {
-		this.dataSource = [
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-			{ name: 'artem', phone: '23432423' },
-		] as UserDto[];
+	loadTemplate() {
+		return this.readOnlyTemplate;
 	}
 
-	close(withAnimation: boolean) {
-		this.el.nativeElement.classList.remove('slideUp');
-		if (withAnimation) {
-			this.el.nativeElement.classList.add('slideDown');
-			new Promise((resolve) => setTimeout(resolve, 400)).then(() =>
-				this.router.navigate(['../additional'])
-			);
-		} else {
-			this.router.navigate(['../additional']);
-		}
+	editUser(user: UserDto) {
+		this.editedUser = { name: user.name, phone: user.phone };
 	}
-
-	@ViewChild('someVar') el: ElementRef;
-	@ViewChild('someBtn') elBtn: ElementRef;
-
-	touchmove(event: TouchEvent) {
-		const touch = event.targetTouches[0];
-		this.el.nativeElement.style.top =
-			touch.pageY < this.minLineHeight
-				? this.el.nativeElement.style.top
-				: touch.pageY + 'px';
-		if (event.targetTouches[0].pageY > this.closeLineHeight) {
-			this.close(false);
-		}
-		this.endPosition = event.targetTouches[0].pageY;
-		// event.preventDefault();
-		event.stopPropagation();
-	}
-
-	closeLineHeight: number;
-	minLineHeight: number;
-	endPosition: number;
-	startPosition: number;
-
-	touchstart(event: TouchEvent) {
-		console.log(`start:${event.targetTouches[0].pageY}`);
-		this.startPosition = event.targetTouches[0].pageY;
-		this.closeLineHeight =
-			(screen.height - this.startPosition) * 0.5 + this.startPosition;
-		this.minLineHeight = this.startPosition * 0.5;
-
-		this.elBtn.nativeElement.classList.add('simple-line-active');
-	}
-
-	touchend(event: TouchEvent) {
-		this.elBtn.nativeElement.classList.remove('simple-line-active');
-
-		if (this.endPosition > this.startPosition) {
-			this.el.nativeElement.style.top = '';
-		}
-		if (this.endPosition < this.closeLineHeight) {
-			this.el.nativeElement.style.top = '';
-		}
-	}
-}
-
-export interface PeriodicElement {
-	name: string;
-	phone: string;
 }

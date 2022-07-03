@@ -1,12 +1,34 @@
-<div class="example-button-row formClass fadeIn">
-	<button mat-raised-button class="nav-button" routerLink="employees">
+<div class="example-button-row main-button-block fadeIn">
+	<div class="base-font-family"><p>Салон</p></div>
+	<button
+		mat-raised-button
+		class="nav-button base-font-family"
+		routerLink="employees"
+	>
 		Сотрудники
 	</button>
-	<button mat-raised-button class="nav-button" routerLink="users">
+	<button
+		mat-raised-button
+		class="nav-button base-font-family"
+		(click)="isUserShow = true"
+	>
 		Клиенты
 	</button>
-	<button mat-raised-button class="nav-button" routerLink="services">
+	<button
+		mat-raised-button
+		class="nav-button base-font-family"
+		(click)="isServiceShow = true"
+	>
 		Процедури
 	</button>
 </div>
 <router-outlet></router-outlet>
+<app-user-edit-list
+	*ngIf="isUserShow"
+	(closeEmit)="isUserShow = false"
+></app-user-edit-list>
+<app-service-edit-list
+	*ngIf="isServiceShow"
+	@ngIfAnimation
+	(closeEmit)="isServiceShow = false"
+></app-service-edit-list>

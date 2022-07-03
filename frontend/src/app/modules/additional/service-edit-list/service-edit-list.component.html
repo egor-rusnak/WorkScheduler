@@ -1,1 +1,32 @@
-<p>service-edit-list works!</p>
+<form
+	#slideElem
+	[formGroup]="serviceInfoForm"
+	class="form slide-block"
+	@slideUpAnimation
+>
+	<input
+		#slideButton
+		(touchmove)="touchmove($event)"
+		(touchend)="touchend($event)"
+		(touchstart)="touchstart($event)"
+		type="button"
+		class="simple-line"
+	/>
+	<div>
+		<mat-form-field class="example-full-width" appearance="fill">
+			<mat-label>Name</mat-label>
+			<input type="text" formControlName="Name" matInput />
+		</mat-form-field>
+		<mat-form-field class="example-full-width" appearance="fill">
+			<mat-label>Telephone</mat-label>
+			<span matPrefix>+380 &nbsp;</span>
+			<input
+				type="tel"
+				formControlName="Phone"
+				matInput
+				placeholder="555-555-1234"
+			/>
+			<mat-icon matSuffix>UA</mat-icon>
+		</mat-form-field>
+	</div>
+</form>
