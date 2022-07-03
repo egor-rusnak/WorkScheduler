@@ -1,1 +1,9 @@
-<p>calendar works!</p>
+<button mat-raised-button [disabled]="isAddMode" (click)="isAddMode = true">
+	Add
+</button>
+<app-schedule-service
+	@ngIfAnimation
+	*ngIf="isAddMode"
+	(closeEvent)="isAddMode = false"
+></app-schedule-service>
+<app-calendar-view></app-calendar-view>

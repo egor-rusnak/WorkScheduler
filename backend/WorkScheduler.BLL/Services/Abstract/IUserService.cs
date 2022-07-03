@@ -6,5 +6,6 @@ namespace WorkScheduler.BLL.Services.Abstract
     {
         CreateUserDto Create(CreateUserDto userDto);
         IEnumerable<CreateUserDto> GetAllUsers();
+        void MarkUserAsEmployer(Guid userId);
     }
 }
