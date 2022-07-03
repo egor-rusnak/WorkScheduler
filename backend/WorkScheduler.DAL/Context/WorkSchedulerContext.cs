@@ -16,7 +16,7 @@ namespace WorkScheduler.DAL.Context
 
         public WorkSchedulerContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

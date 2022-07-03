@@ -78,47 +78,6 @@ tr.example-element-row:not(.example-expanded-row):active {
 	opacity: 0.5;
 }
 
-.slideUp {
-	animation-name: slideUp;
-
-	animation-duration: 0.4s;
-
-	animation-timing-function: ease-in-out;
-
-	visibility: visible !important;
-}
-
-@keyframes slideUp {
-	0% {
-		transform: translateY(200%);
-	}
-	100% {
-		transform: translateY(0%);
-	}
-}
-
-.slideDown {
-	animation-name: slideDown;
-	-webkit-animation-name: slideDown;
-
-	animation-duration: 1s;
-	-webkit-animation-duration: 1s;
-
-	animation-timing-function: ease;
-	-webkit-animation-timing-function: ease;
-
-	visibility: visible !important;
-}
-
-@keyframes slideDown {
-	0% {
-		transform: translateY(0%);
-	}
-	100% {
-		transform: translateY(100%);
-	}
-}
-
 section {
 	display: table;
 }

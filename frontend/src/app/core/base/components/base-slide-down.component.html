@@ -1,0 +1,11 @@
+<div #slideElem class="slide-block slideUp" novalidate>
+	<input
+		#slideButton
+		(touchmove)="touchmove($event)"
+		(touchend)="touchend($event)"
+		(touchstart)="touchstart($event)"
+		type="button"
+		class="simple-line"
+	/>
+	<ng-content></ng-content>
+</div>

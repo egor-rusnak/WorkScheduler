@@ -25,7 +25,12 @@ namespace WorkScheduler.BLL.Services
 
         public IEnumerable<EmployeeDto> GetAll()
         {
-            return _mapper.Map<IEnumerable<EmployeeDto>>(_context.Employes.Include(e => e.Phones));
+            return _mapper.Map<IEnumerable<EmployeeDto>>(_context.Employees.Include(e => e.Phones));
+        }
+
+        public IEnumerable<EmployeeDto> SearchEmployees(string searchText, int topSearchCount)
+        {
+            throw new NotImplementedException();
         }
     }
 }

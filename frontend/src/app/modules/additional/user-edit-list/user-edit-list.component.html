@@ -1,77 +1,70 @@
-<form
-	#slideElem
-	[formGroup]="userInfoForm"
-	class="form slide-block slideUp"
-	novalidate
->
-	<input
-		#slideButton
-		(touchmove)="touchmove($event)"
-		(touchend)="touchend($event)"
-		(touchstart)="touchstart($event)"
-		type="button"
-		class="simple-line"
-	/>
-	<button
-		*ngIf="!isAddMode"
-		(click)="isAddMode = true"
-		mat-raised-button
-		class="save-btn"
-	>
-		Add
-	</button>
-	<div #someDiv *ngIf="isAddMode" class="input-fields" @pullDownAnimation>
-		<mat-form-field class="example-full-width" appearance="outline">
-			<mat-label>Name</mat-label>
-			<input type="text" formControlName="Name" matInput />
-		</mat-form-field>
-		<mat-form-field class="example-full-width" appearance="outline">
-			<mat-label>Telephone</mat-label>
-			<span matPrefix>+380 &nbsp;</span>
-			<input
-				type="tel"
-				formControlName="Phone"
-				matInput
-				placeholder="555-555-1234"
-			/>
-			<mat-icon matSuffix>UA</mat-icon>
-		</mat-form-field>
-		<button (click)="saveUser()" mat-raised-button class="save-btn">
-			Save
+<app-base-slide-dowm (closeEmit)="this.closeEmit.emit(null)">
+	<form [formGroup]="userInfoForm">
+		<button
+			*ngIf="!isAddMode"
+			(click)="isAddMode = true"
+			mat-raised-button
+			class="save-btn"
+		>
+			Add
 		</button>
-		<button (click)="isAddMode = false" mat-raised-button class="save-btn">
-			Close
-		</button>
-	</div>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<td>Имя</td>
-				<td>Телефон</td>
-				<td></td>
-				<td></td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let user of users">
-				<td>{{ user.name }}</td>
-				<td>{{ user.phone }}</td>
-				<td>
-					<input
-						type="button"
-						value="Изменить"
-						(click)="editUser(user)"
-						class="btn btn-default"
-					/>
-				</td>
-				<td>
-					<input
-						type="button"
-						value="Удалить"
-						class="btn btn-danger"
-					/>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</form>
+		<div #someDiv *ngIf="isAddMode" class="input-fields" @pullDownAnimation>
+			<mat-form-field class="example-full-width" appearance="outline">
+				<mat-label>Name</mat-label>
+				<input type="text" formControlName="Name" matInput />
+			</mat-form-field>
+			<mat-form-field class="example-full-width" appearance="outline">
+				<mat-label>Telephone</mat-label>
+				<span matPrefix>+380 &nbsp;</span>
+				<input
+					type="tel"
+					formControlName="Phone"
+					matInput
+					placeholder="555-555-1234"
+				/>
+				<mat-icon matSuffix>UA</mat-icon>
+			</mat-form-field>
+			<button (click)="saveUser()" mat-raised-button class="save-btn">
+				Save
+			</button>
+			<button
+				(click)="isAddMode = false"
+				mat-raised-button
+				class="save-btn"
+			>
+				Close
+			</button>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>Имя</td>
+					<td>Телефон</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let user of users">
+					<td>{{ user.name }}</td>
+					<td>{{ user.phone }}</td>
+					<td>
+						<input
+							type="button"
+							value="Изменить"
+							(click)="editUser(user)"
+							class="btn btn-default"
+						/>
+					</td>
+					<td>
+						<input
+							type="button"
+							value="Удалить"
+							class="btn btn-danger"
+						/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</app-base-slide-dowm>

@@ -16,6 +16,16 @@ namespace WorkScheduler.BLL.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ScheduleDto> GetClientSchedules(Guid clientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ScheduleDto> GetEmployeeSchedules(Guid employeeId)
+        {
+            throw new NotImplementedException();
+        }
+
         public ScheduleDto GetSchedule(Guid scheduleId)
         {
             throw new NotImplementedException();

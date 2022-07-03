@@ -37,16 +37,12 @@ export const slideUpAnimation = trigger('slideUpAnimation', [
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [slideUpAnimation],
 })
-export class ServiceEditListComponent
-	extends BaseSlideDownComponent
-	implements OnInit
-{
+export class ServiceEditListComponent implements OnInit {
 	serviceInfoForm: FormGroup;
 
 	@Output() closeEmit = new EventEmitter();
 
 	constructor() {
-		super();
 		this._createForm();
 	}
 

@@ -21,7 +21,7 @@ namespace WorkScheduler.BLL.MappingProfiles
             CreateMap<CreateUserDto, User>().ForMember(u => u.Phones, opt =>
                 opt.MapFrom(ud => new List<Phone>() { new Phone { Number = ud.Phone } })
             );
-            CreateMap<User, CreateUserDto>().ForMember(ud => ud.Phone, opt => opt.MapFrom(u => u.Phones.FirstOrDefault()));
+            CreateMap<User, CreateUserDto>().ForMember(ud => ud.Phone, opt => opt.MapFrom(u => u.Phones.FirstOrDefault().Number));
         }
     }
 }

@@ -56,7 +56,6 @@ export const pullDownAnimation = trigger('pullDownAnimation', [
 		'./user-edit-list.component.scss',
 		'../additional.component.scss',
 	],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [
 		trigger('detailExpand', [
 			state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -69,29 +68,25 @@ export const pullDownAnimation = trigger('pullDownAnimation', [
 		pullDownAnimation,
 	],
 })
-export class UserEditListComponent
-	extends BaseSlideDownComponent
-	implements OnInit
-{
+export class UserEditListComponent implements OnInit {
 	userInfoForm: FormGroup;
 	editedUser: UserDto | null = null;
 	public users: UserDto[];
 	isAddMode: boolean = false;
 
+	@Output() closeEmit = new EventEmitter();
+
 	@ViewChild('readOnlyTemplate', { static: false }) readOnlyTemplate:
 		| TemplateRef<any>
 		| undefined;
 
-	@Output() closeEmit = new EventEmitter();
 	@ViewChild('someDiv') elDiv: ElementRef;
 
 	constructor(
 		protected client: HttpInternalService,
 		protected router: Router,
 		protected changeDetector: ChangeDetectorRef
-	) {
-		super();
-	}
+	) {}
 
 	private _createForm() {
 		this.userInfoForm = new FormGroup({
@@ -101,10 +96,10 @@ export class UserEditListComponent
 	}
 
 	private _loadUsers() {
-		this.users = [...this.users, { name: 'Artrem', phone: '4234234' }];
-		// this.serv.getUsers().subscribe((data: Array<User>) => {
-		//         this.users = data;
-		//     });
+		this.client.getRequest<UserDto[]>('Users/Index').subscribe((result) => {
+			this.users = result;
+			this.changeDetector.detectChanges();
+		});
 	}
 
 	ngOnInit(): void {
@@ -112,10 +107,6 @@ export class UserEditListComponent
 		this.users = [] as UserDto[];
 		this._loadUsers();
 		this.changeDetector.detectChanges();
-	}
-
-	closeEvent() {
-		this.closeEmit.emit(null);
 	}
 
 	saveUser() {
@@ -131,6 +122,7 @@ export class UserEditListComponent
 			.postRequest<UserDto>('Users/Create', model)
 			.subscribe((result) => {
 				alert(result.name);
+				this.users.push(result);
 			});
 	}
 

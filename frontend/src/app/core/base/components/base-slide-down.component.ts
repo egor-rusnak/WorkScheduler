@@ -7,33 +7,42 @@ import {
 } from '@angular/core';
 
 @Component({
-	selector: 'base-slide-dowm',
-	template: '',
-	styleUrls: [],
+	selector: 'app-base-slide-dowm',
+	templateUrl: './base-slide-down.component.html',
+	styleUrls: ['./base-slide-down.component.scss'],
 })
-export abstract class BaseSlideDownComponent {
+export class BaseSlideDownComponent {
 	closeLineHeight: number;
 	minLineHeight: number;
 	endPosition: number;
 	startPosition: number;
+	isClose: boolean = false;
 
 	@ViewChild('slideElem') el: ElementRef;
 	@ViewChild('slideButton') elBtn: ElementRef;
 
+	@Output() closeEmit = new EventEmitter();
+
 	constructor() {}
 
 	close(withAnimation: boolean) {
+		this.isClose = true;
 		this.el.nativeElement.classList.remove('slideUp');
 		if (withAnimation) {
 			this.el.nativeElement.classList.add('slideDown');
+			setInterval(() => this.closeEvent(), 300);
 		} else {
 			this.closeEvent();
 		}
 	}
 
-	abstract closeEvent();
+	closeEvent() {
+		this.closeEmit.emit(null);
+	}
 
 	touchmove(event: TouchEvent) {
+		if (this.isClose) return;
+
 		console.log(`move:${event.targetTouches[0].pageY}`);
 		const touch = event.targetTouches[0];
 		this.el.nativeElement.style.top =
@@ -41,7 +50,8 @@ export abstract class BaseSlideDownComponent {
 				? this.el.nativeElement.style.top
 				: touch.pageY + 'px';
 		if (event.targetTouches[0].pageY > this.closeLineHeight) {
-			this.close(false);
+			this.isClose = true;
+			this.close(true);
 		}
 		this.endPosition = event.targetTouches[0].pageY;
 		event.stopPropagation();
@@ -59,6 +69,7 @@ export abstract class BaseSlideDownComponent {
 
 	touchend(event: TouchEvent) {
 		this.elBtn.nativeElement.classList.remove('simple-line-active');
+		if (this.isClose) return;
 
 		if (this.endPosition > this.startPosition) {
 			this.el.nativeElement.style.top = '';
