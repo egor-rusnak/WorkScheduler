@@ -8,7 +8,7 @@ namespace WorkScheduler.DAL.Context
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Phone> Phones { get; set; }
-        public DbSet<Employee> Employes { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<ProvidedService> ProvidedServices { get; set; }
         public DbSet<ScheduledService> ScheduledServices { get; set; }
         public DbSet<Service> Services { get; set; }
@@ -16,7 +16,7 @@ namespace WorkScheduler.DAL.Context
 
         public WorkSchedulerContext(DbContextOptions options) : base(options)
         {
-            // Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

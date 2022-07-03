@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkScheduler.API", "WorkScheduler.API\WorkScheduler.API.csproj", "{A0AF8885-FEDB-4FD1-91FF-54EC4AB847CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkScheduler.DAL", "WorkScheduler.API.DAL\WorkScheduler.DAL.csproj", "{D55DC5BB-6E0D-4361-8F07-535C6774A40D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkScheduler.DAL", "WorkScheduler.DAL\WorkScheduler.DAL.csproj", "{D55DC5BB-6E0D-4361-8F07-535C6774A40D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkScheduler.BLL", "WorkScheduler.BLL\WorkScheduler.BLL.csproj", "{242AD0E9-2A46-434A-88FA-711A0F9ACE57}"
 EndProject

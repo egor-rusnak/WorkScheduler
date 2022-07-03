@@ -15,9 +15,15 @@ namespace WorkScheduler.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetUserSchedules(Guid userId)
+        public IActionResult GetClientSchedules(Guid userId)
         {
-            return Ok();
+            return Ok(_scheduleService.GetClientSchedules(userId));
+        }
+
+        [HttpGet]
+        public IActionResult GetEmployeeSchedules(Guid employeeId)
+        {
+            return Ok(_scheduleService.GetEmployeeSchedules(employeeId));
         }
     }
 }

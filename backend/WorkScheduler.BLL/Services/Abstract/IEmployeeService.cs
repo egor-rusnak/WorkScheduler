@@ -6,5 +6,6 @@ namespace WorkScheduler.BLL.Services.Abstract
     {
         EmployeeDto Create(EmployeeDto employeeDto);
         IEnumerable<EmployeeDto> GetAll();
+        IEnumerable<EmployeeDto> SearchEmployees(string searchText, int topSearchCount);
     }
 }

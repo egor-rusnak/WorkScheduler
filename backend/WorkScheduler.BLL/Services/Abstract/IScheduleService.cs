@@ -4,8 +4,8 @@ namespace WorkScheduler.BLL.Services.Abstract
 {
     public interface IScheduleService
     {
-        IEnumerable<ScheduleDto> GetUserSchedules(Guid userId);
-        ScheduleDto GetSchedule(Guid scheduleId);
+        IEnumerable<ScheduleDto> GetClientSchedules(Guid clientId);
+        IEnumerable<ScheduleDto> GetEmployeeSchedules(Guid employeeId);
         ScheduleDto CreateSchedule(CreateScheduleDto scheduleDto);
     }
 }
