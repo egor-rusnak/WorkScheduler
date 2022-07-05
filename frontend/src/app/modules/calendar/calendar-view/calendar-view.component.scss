@@ -2,15 +2,11 @@
 	display: block;
 	width: 100%;
 	max-width: 500px;
+	padding-left: 1em;
 	border-top: 1px solid black;
 	background-color: darkblue;
 	user-select: none;
-}
-.row {
-	color: #f5deb3;
-	padding: 0.8em;
-	font-size: 0.7em;
-	user-select: none;
+	color: white;
 }
 .active-class {
 	background-color: rgb(41, 145, 145);

@@ -6,7 +6,7 @@
 		(mousemove)="touch($event, time.index)"
 		*ngFor="let time of timedRows"
 	>
-		<div class="row">
+		<div>
 			{{ time.time }}
 			<span *ngIf="this.checkIsInSelection(time.index) || time.billed">
 				Selected
