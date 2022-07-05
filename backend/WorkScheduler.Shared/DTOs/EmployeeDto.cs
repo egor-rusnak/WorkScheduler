@@ -1,7 +1,8 @@
-﻿namespace WorkScheduler.Shared.DTOs
+﻿using WorkScheduler.Shared.DTOs.Abstract;
+
+namespace WorkScheduler.Shared.DTOs
 {
-    public class EmployeeDto
+    public class EmployeeDto : BaseListDto
     {
-        public string Name { get; set; }
     }
 }

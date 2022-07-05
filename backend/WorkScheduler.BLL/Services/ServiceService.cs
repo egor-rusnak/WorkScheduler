@@ -2,7 +2,7 @@
 using WorkScheduler.BLL.Services.Abstract;
 using WorkScheduler.DAL.Context;
 using WorkScheduler.DAL.Entities;
-using WorkScheduler.Shared.DTOs;
+using WorkScheduler.Shared.DTOs.Service;
 
 namespace WorkScheduler.BLL.Services
 {
@@ -21,9 +21,25 @@ namespace WorkScheduler.BLL.Services
             return _mapper.Map<CreateServiceDto>(service);
         }
 
-        public IEnumerable<CreateServiceDto> GetAllServices()
+        public IEnumerable<ServiceDto> GetAllServices()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<IEnumerable<ServiceDto>>(_context.Services);
+        }
+
+        public CreateServiceTypeDto CreateType(CreateServiceTypeDto serviceTypeDto)
+        {
+            var serviceType = _mapper.Map<ServiceType>(serviceTypeDto);
+
+            _context.Add(serviceType);
+            _context.SaveChanges();
+
+            return _mapper.Map<CreateServiceTypeDto>(serviceType);
+        }
+
+        public IEnumerable<ServiceTypeDto> GetAllServiceTypes()
+        {
+            return _mapper.Map<IEnumerable<ServiceTypeDto>>(_context.ServiceTypes);
         }
     }
+
 }

@@ -26,6 +26,7 @@ providerServices.AddDbContext<WorkSchedulerContext>(opt =>
 );
 
 providerServices.AddTransient<IUserService, UserService>();
+providerServices.AddTransient<IServiceService, ServiceService>();
 providerServices.AddTransient<IEmployeeService, EmployeeService>();
 
 

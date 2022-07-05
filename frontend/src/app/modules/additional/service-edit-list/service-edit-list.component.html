@@ -1,21 +1,41 @@
 <app-base-slide-dowm (closeEmit)="this.closeEmit.emit(null)">
+	<div>
+		<select [(ngModel)]="selectedServiceType">
+			<option value="" disabled>Choose a Category</option>
+			<option *ngFor="let c of serviceTypes" [ngValue]="c">
+				{{ c.name }}
+			</option>
+		</select>
+	</div>
 	<form [formGroup]="serviceInfoForm">
 		<div>
-			<mat-form-field class="example-full-width" appearance="fill">
-				<mat-label>Name</mat-label>
-				<input type="text" formControlName="Name" matInput />
-			</mat-form-field>
-			<mat-form-field class="example-full-width" appearance="fill">
-				<mat-label>Telephone</mat-label>
-				<span matPrefix>+380 &nbsp;</span>
-				<input
-					type="tel"
-					formControlName="Phone"
-					matInput
-					placeholder="555-555-1234"
-				/>
-				<mat-icon matSuffix>UA</mat-icon>
-			</mat-form-field>
+			<label>Name</label>
+			<input type="text" formControlName="name" />
 		</div>
+		<div>
+			<label>Duration time</label>
+			<input type="number" formControlName="durationTime" />
+		</div>
+		<div>
+			<label>Cost</label>
+			<input type="number" formControlName="cost" />
+		</div>
+		<button (click)="saveService()" mat-raised-button>Add type</button>
 	</form>
+	<form [formGroup]="serviceTypeInfoGroup">
+		<mat-form-field class="example-full-width" appearance="fill">
+			<mat-label>Name</mat-label>
+			<input type="text" formControlName="name" matInput />
+		</mat-form-field>
+		<button (click)="saveServiceType()" mat-raised-button>Add type</button>
+	</form>
+	<div class="button-group">
+		<button (click)="saveServiceType()">Add new...</button>
+	</div>
+	<div class="button-group" *ngFor="let type of serviceTypes">
+		<button (click)="openEditPage(type)">{{ type.name }}</button>
+		<div *ngIf="type.id === selectedServiceType.id">
+			<p>{{ type.name }}</p>
+		</div>
+	</div>
 </app-base-slide-dowm>

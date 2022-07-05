@@ -8,5 +8,6 @@ namespace WorkScheduler.DAL.Entities
         //in minutes
         public int DurationTime { get; set; }
         public ServiceType ServiceType { get; set; }
+        public Guid ServiceTypeId { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WorkScheduler.BLL.Services.Abstract;
-using WorkScheduler.Shared.DTOs;
+using WorkScheduler.Shared.DTOs.Service;
 
 namespace WorkScheduler.API.Controllers
 {
@@ -15,16 +15,28 @@ namespace WorkScheduler.API.Controllers
             _serviceService = serviceService;
         }
 
-        [HttpPost]
+        [HttpPost("/[controller]/Types/Create")]
         public ActionResult<CreateServiceDto> Create(CreateServiceDto userDto)
         {
             return _serviceService.Create(userDto);
         }
 
-        [HttpPost("/[controller]/Types/Create")]
-        public ActionResult<CreateServiceDto> CreateType(CreateServiceDto userDto)
+        [HttpGet("/[controller]/Types/GetAllServices")]
+        public ActionResult<IEnumerable<ServiceDto>> GetAllServices()
         {
-            return _serviceService.Create(userDto);
+            return Ok(_serviceService.GetAllServices());
+        }
+
+        [HttpPost("/[controller]/Types/CreateType")]
+        public ActionResult<CreateServiceTypeDto> CreateType(CreateServiceTypeDto serviceTypeDto)
+        {
+            return _serviceService.CreateType(serviceTypeDto);
+        }
+
+        [HttpGet("/[controller]/Types/GetAllServiceTypes")]
+        public ActionResult<IEnumerable<ServiceDto>> GetAllServiceTypes()
+        {
+            return Ok(_serviceService.GetAllServiceTypes());
         }
     }
 }
