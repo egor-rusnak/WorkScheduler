@@ -1,6 +1,8 @@
-﻿namespace WorkScheduler.Shared.DTOs.Schedule
+﻿using WorkScheduler.Shared.DTOs.Service;
+
+namespace WorkScheduler.Shared.DTOs.Schedule
 {
-	public class ScheduleDto
+    public class ScheduleDto
 	{
 		public Guid Id { get; set; }
 		public DateTime StartDateTime { get; set; }

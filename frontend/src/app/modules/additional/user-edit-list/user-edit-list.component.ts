@@ -98,7 +98,6 @@ export class UserEditListComponent implements OnInit {
 	private _loadUsers() {
 		this.client.getRequest<UserDto[]>('Users/Index').subscribe((result) => {
 			this.users = result;
-			this.changeDetector.detectChanges();
 		});
 	}
 
@@ -106,7 +105,6 @@ export class UserEditListComponent implements OnInit {
 		this._createForm();
 		this.users = [] as UserDto[];
 		this._loadUsers();
-		this.changeDetector.detectChanges();
 	}
 
 	saveUser() {

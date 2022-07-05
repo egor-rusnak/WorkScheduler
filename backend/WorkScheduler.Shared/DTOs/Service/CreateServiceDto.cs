@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using WorkScheduler.DAL.Entities;
 
-namespace WorkScheduler.Shared.DTOs
+namespace WorkScheduler.Shared.DTOs.Service
 {
     public class CreateServiceDto
     {
@@ -11,7 +11,10 @@ namespace WorkScheduler.Shared.DTOs
         [JsonPropertyName("durationTime")]
         public int DurationTime { get; set; }
 
-        [JsonPropertyName("serviceType")]
-        public ServiceType ServiceType { get; set; }
+        [JsonPropertyName("serviceTypeId")]
+        public Guid ServiceTypeId { get; set; }
+
+        [JsonPropertyName("cost")]
+        public decimal Cost { get; set; }
     }
 }
