@@ -31,7 +31,6 @@ const routes: Routes = [
 			},
 		],
 	},
-	{ path: 'zhepa/fuck', component: CalendarComponent },
 ];
 
 @NgModule({

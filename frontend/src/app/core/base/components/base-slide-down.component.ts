@@ -43,7 +43,6 @@ export class BaseSlideDownComponent {
 	touchmove(event: TouchEvent) {
 		if (this.isClose) return;
 
-		console.log(`move:${event.targetTouches[0].pageY}`);
 		const touch = event.targetTouches[0];
 		this.el.nativeElement.style.top =
 			touch.pageY < this.minLineHeight

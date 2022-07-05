@@ -10,7 +10,6 @@ import {
 	selector: 'app-calendar-view',
 	templateUrl: './calendar-view.component.html',
 	styleUrls: ['./calendar-view.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarViewComponent implements OnInit {
 	public timedRows: TimeRow[];

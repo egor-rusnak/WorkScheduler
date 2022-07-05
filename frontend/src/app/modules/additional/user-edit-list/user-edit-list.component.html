@@ -1,20 +1,15 @@
 <app-base-slide-dowm (closeEmit)="this.closeEmit.emit(null)">
 	<form [formGroup]="userInfoForm">
-		<button
-			*ngIf="!isAddMode"
-			(click)="isAddMode = true"
-			mat-raised-button
-			class="save-btn"
-		>
+		<button *ngIf="!isAddMode" (click)="isAddMode = true" class="save-btn">
 			Add
 		</button>
 		<div #someDiv *ngIf="isAddMode" class="input-fields" @pullDownAnimation>
-			<mat-form-field class="example-full-width" appearance="outline">
-				<mat-label>Name</mat-label>
-				<input type="text" formControlName="Name" matInput />
-			</mat-form-field>
-			<mat-form-field class="example-full-width" appearance="outline">
-				<mat-label>Telephone</mat-label>
+			<div class="example-full-width">
+				<label>Name</label>
+				<input type="text" formControlName="Name" />
+			</div>
+			<div class="example-full-width">
+				<label>Telephone</label>
 				<span matPrefix>+380 &nbsp;</span>
 				<input
 					type="tel"
@@ -22,20 +17,9 @@
 					matInput
 					placeholder="555-555-1234"
 				/>
-				<mat-icon matSuffix>UA</mat-icon>
-			</mat-form-field>
-			<button
-				(click)="saveUser()"
-				mat-raised-button
-				class="save-btn btnColor"
-			>
-				Save
-			</button>
-			<button
-				(click)="isAddMode = false"
-				mat-raised-button
-				class="save-btn btnColor"
-			>
+			</div>
+			<button (click)="saveUser()" class="save-btn btnColor">Save</button>
+			<button (click)="isAddMode = false" class="save-btn btnColor">
 				Close
 			</button>
 		</div>

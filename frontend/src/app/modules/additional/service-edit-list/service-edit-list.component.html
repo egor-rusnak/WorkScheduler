@@ -8,26 +8,26 @@
 		</select>
 	</div>
 	<form [formGroup]="serviceInfoForm">
-		<div>
+		<div class="example-full-width">
 			<label>Name</label>
 			<input type="text" formControlName="name" />
 		</div>
-		<div>
+		<div class="example-full-width">
 			<label>Duration time</label>
 			<input type="number" formControlName="durationTime" />
 		</div>
-		<div>
+		<div class="example-full-width">
 			<label>Cost</label>
 			<input type="number" formControlName="cost" />
 		</div>
-		<button (click)="saveService()" mat-raised-button>Add type</button>
+		<button (click)="saveService()">Add type</button>
 	</form>
 	<form [formGroup]="serviceTypeInfoGroup">
-		<mat-form-field class="example-full-width" appearance="fill">
-			<mat-label>Name</mat-label>
-			<input type="text" formControlName="name" matInput />
-		</mat-form-field>
-		<button (click)="saveServiceType()" mat-raised-button>Add type</button>
+		<div class="example-full-width">
+			<label>Name</label>
+			<input type="text" formControlName="name" />
+		</div>
+		<button (click)="saveServiceType()">Add type</button>
 	</form>
 	<div class="button-group">
 		<button (click)="saveServiceType()">Add new...</button>

@@ -25,7 +25,8 @@
 
 .example-full-width {
 	width: 100%;
-	display: block;
+	display: flex;
+	flex-direction: column;
 }
 .save-btn {
 	width: 100%;
