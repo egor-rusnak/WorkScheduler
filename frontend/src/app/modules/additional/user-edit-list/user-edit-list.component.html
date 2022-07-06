@@ -1,6 +1,11 @@
 <app-base-slide-dowm (closeEmit)="this.closeEmit.emit(null)">
 	<form [formGroup]="userInfoForm">
-		<button *ngIf="!isAddMode" (click)="isAddMode = true" class="save-btn">
+		<button
+			*ngIf="!isAddMode"
+			(click)="isAddMode = true"
+			class="save-btn btn btn-primary"
+			@pullDownAnimation
+		>
 			Add
 		</button>
 		<div #someDiv *ngIf="isAddMode" class="input-fields" @pullDownAnimation>

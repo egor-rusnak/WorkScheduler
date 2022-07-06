@@ -28,24 +28,24 @@ import { BaseSlideDownComponent } from '@core/base/components/base-slide-down.co
 export const pullDownAnimation = trigger('pullDownAnimation', [
 	transition(':enter', [
 		style({
-			transform: 'scaleY(0.1)',
-			transformOrigin: '50% 0%',
+			height: '0',
+			overflow: 'hidden',
+			'border-width': 0,
+			opacity: 0,
 		}),
 		animate(
-			'0.5s',
-			keyframes([
-				style({ transform: 'scaleY(0.1)' }),
-				style({ transform: 'scaleY(1.1)' }),
-				style({ transform: 'scaleY(1)' }),
-			])
+			'0.3s',
+			style({ height: '*', 'border-width': '*', opacity: '*' })
 		),
 	]),
 	transition(':leave', [
 		style({
-			transform: 'scaleY(1)',
-			transformOrigin: '50% 0%',
+			height: '*',
+			overflow: 'hidden',
+			'border-width': '*',
+			opacity: '*',
 		}),
-		animate('0.3s', style({ transform: 'scaleY(0)' })),
+		animate('0.3s', style({ height: '0', 'border-width': 0, opacity: 0 })),
 	]),
 ]);
 
