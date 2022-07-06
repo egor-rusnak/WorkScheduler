@@ -32,10 +32,16 @@
 	<div class="button-group">
 		<button (click)="saveServiceType()">Add new...</button>
 	</div>
-	<div class="button-group" *ngFor="let type of serviceTypes">
-		<button (click)="openEditPage(type)">{{ type.name }}</button>
-		<div *ngIf="type.id === selectedServiceType.id">
-			<p>{{ type.name }}</p>
-		</div>
+	<div class="btn-group-vertical">
+		<button
+			*ngFor="let type of serviceTypes"
+			class="btn btn-secondary"
+			(click)="openEditPage(type)"
+		>
+			{{ type.name }}
+		</button>
+		<!-- <div *ngIf="type.id === selectedServiceType.id">
+				<p>{{ type.name }}</p>
+			</div> -->
 	</div>
 </app-base-slide-dowm>
