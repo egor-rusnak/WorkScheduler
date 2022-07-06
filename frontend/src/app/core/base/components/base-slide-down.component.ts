@@ -47,7 +47,7 @@ export class BaseSlideDownComponent {
 		this.el.nativeElement.style.top =
 			touch.pageY < this.minLineHeight
 				? this.el.nativeElement.style.top
-				: touch.pageY + 'px';
+				: `calc(${touch.pageY}px - 1.5em)`;
 		if (event.targetTouches[0].pageY > this.closeLineHeight) {
 			this.isClose = true;
 			this.close(true);
