@@ -1,54 +1,100 @@
 <app-base-slide-dowm (closeEmit)="this.closeEmit.emit(null)">
-	<div>
-		<select [(ngModel)]="selectedServiceType">
-			<option value="" disabled>Choose a Category</option>
-			<option *ngFor="let c of serviceTypes" [ngValue]="c">
-				{{ c.name }}
-			</option>
-		</select>
+	<div class="list-group" *ngFor="let type of serviceTypes">
+		<div class="list-group-item" (click)="openEditPage(type)">
+			<span>{{ type.name }}</span>
+			<button *ngIf="isExistsService" class="arrow-btn">›</button>
+			<!-- <button class="arrow-btn" (click)="showEditPage = true">✎</button> -->
+			<div *ngIf="isViewService && type.id === selectedServiceType.id">
+				<div class="list-group" *ngFor="let service of services">
+					<div class="list-group-item">
+						<span>{{ service.name }}</span>
+					</div>
+				</div>
+				<!-- <form [formGroup]="serviceInfoForm">
+					<div>
+						<button
+							class="list-group-item"
+							(click)="isAddServiceMode = !isAddServiceMode"
+						>
+							{{ !isAddServiceMode ? "Add new..." : "Cancel" }}
+						</button>
+					</div>
+					<div
+						class="add-new-item-to-list"
+						*ngIf="isAddServiceMode"
+						@pullDownAnimation
+					>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input
+									type="text"
+									class="form-control"
+									id="formGroupNameInput"
+									autocomplete="off"
+									autofocus
+									required
+								/>
+								<label class="floating-label">Name</label>
+							</div>
+						</div>
+						<div class="example-full-width">
+							<label>Duration time</label>
+							<input
+								type="number"
+								formControlName="durationTime"
+							/>
+						</div>
+						<div class="example-full-width">
+							<label>Cost</label>
+							<input type="number" formControlName="cost" />
+						</div>
+					</div>
+				</form> -->
+			</div>
+		</div>
 	</div>
-	<form [formGroup]="serviceInfoForm">
-		<div class="form-group">
-			<div class="floating-label-group">
+	<!-- <form [formGroup]="serviceTypeInfoGroup">
+		<div class="list-group">
+			<button
+				class="list-group-item"
+				(click)="isAddServiceTypeMode = !isAddServiceTypeMode"
+			>
+				{{ !isAddServiceTypeMode ? "Add new..." : "Cancel" }}
+			</button>
+		</div>
+		<div
+			class="input-group mb-3 add-new-item-to-list"
+			*ngIf="isAddServiceTypeMode"
+			@pullDownAnimation
+		>
+			<div class="floating-label-group input-group mb-3">
 				<input
 					type="text"
 					class="form-control"
-					id="formGroupNameInput"
-					autocomplete="off"
+					aria-describedby="add-service-type-button"
 					autofocus
 					required
+					autocomplete="off"
+					formControlName="name"
 				/>
 				<label class="floating-label">Name</label>
+				<div class="input-group-append">
+					<button
+						class="btn btn-outline-secondary"
+						type="button"
+						id="add-service-type-button"
+						(click)="saveServiceType()"
+					>
+						Save
+					</button>
+				</div>
 			</div>
 		</div>
-		<div class="example-full-width">
-			<label>Duration time</label>
-			<input type="number" formControlName="durationTime" />
-		</div>
-		<div class="example-full-width">
-			<label>Cost</label>
-			<input type="number" formControlName="cost" />
-		</div>
-		<button (click)="saveService()">Add type</button>
-	</form>
-	<form [formGroup]="serviceTypeInfoGroup">
-		<div class="example-full-width">
-			<label>Name</label>
-			<input type="text" formControlName="name" />
-		</div>
-		<button (click)="saveServiceType()">Add type</button>
-	</form>
-	<div class="button-group">
-		<button class="btn btn-secondary" (click)="saveServiceType()">
-			Add new...
-		</button>
-	</div>
-	<div class="list-group" role="group" *ngFor="let type of serviceTypes">
-		<div class="list-group-item" (click)="openEditPage(type)">
-			{{ type.name }}
-		</div>
-		<div *ngIf="type.id === selectedServiceType.id">
-			<p>{{ type.name }}</p>
-		</div>
-	</div>
+	</form> -->
+	<!-- <app-base-slide-dowm
+		*ngIf="showEditPage"
+		(closeEmit)="showEditPage = false"
+	>
+		<input type="text" />
+	</app-base-slide-dowm> -->
 </app-base-slide-dowm>

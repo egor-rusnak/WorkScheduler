@@ -15,16 +15,16 @@ namespace WorkScheduler.API.Controllers
             _serviceService = serviceService;
         }
 
-        [HttpPost("/[controller]/Types/Create")]
+        [HttpPost("/[controller]/Create")]
         public ActionResult<CreateServiceDto> Create(CreateServiceDto userDto)
         {
             return _serviceService.Create(userDto);
         }
 
-        [HttpGet("/[controller]/Types/GetAllServices")]
-        public ActionResult<IEnumerable<ServiceDto>> GetAllServices()
+        [HttpGet("/[controller]/GetAllServices/{typeId}")]
+        public ActionResult<IEnumerable<ServiceDto>> GetAllServices(Guid typeId)
         {
-            return Ok(_serviceService.GetAllServices());
+            return Ok(_serviceService.GetServicesByType(typeId));
         }
 
         [HttpPost("/[controller]/Types/CreateType")]

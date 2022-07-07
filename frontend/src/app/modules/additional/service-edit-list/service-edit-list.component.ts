@@ -5,6 +5,30 @@ import { ServiceTypeDto } from '@core/models/service-type-dto';
 import { HttpInternalService } from '@core/services/http-internal.service';
 import { ServiceDto } from '@core/models/service-dto';
 
+export const pullDownAnimation = trigger('pullDownAnimation', [
+	transition(':enter', [
+		style({
+			height: '0',
+			overflow: 'hidden',
+			'border-width': 0,
+			opacity: 0,
+		}),
+		animate(
+			'0.3s',
+			style({ height: '*', 'border-width': '*', opacity: '*' })
+		),
+	]),
+	transition(':leave', [
+		style({
+			height: '*',
+			overflow: 'hidden',
+			'border-width': '*',
+			opacity: '*',
+		}),
+		animate('0.3s', style({ height: '0', 'border-width': 0, opacity: 0 })),
+	]),
+]);
+
 @Component({
 	selector: 'app-service-edit-list',
 	templateUrl: './service-edit-list.component.html',
@@ -12,14 +36,23 @@ import { ServiceDto } from '@core/models/service-dto';
 		'./service-edit-list.component.scss',
 		'../additional.component.scss',
 	],
+	animations: [pullDownAnimation],
 })
 export class ServiceEditListComponent implements OnInit {
 	serviceInfoForm: FormGroup;
 	serviceTypeInfoGroup: FormGroup;
 	@Output() closeEmit = new EventEmitter();
+	isAddServiceTypeMode: boolean = false;
+	isAddServiceMode: boolean = false;
+	addBtnCaption: string = 'Add new...';
+	isViewService: boolean = false;
+	showEditPage: boolean = false;
+	isExistsService: boolean = false;
 
 	public serviceTypes: ServiceTypeDto[];
 	selectedServiceType: ServiceTypeDto;
+
+	public services: ServiceDto[];
 
 	constructor(protected client: HttpInternalService) {
 		this._createForms();
@@ -49,6 +82,14 @@ export class ServiceEditListComponent implements OnInit {
 			});
 	}
 
+	private _loadService(typeId) {
+		this.client
+			.getRequest<ServiceDto[]>(`Service/GetAllServices/${typeId}`)
+			.subscribe((result) => {
+				this.services = result;
+			});
+	}
+
 	ngOnInit(): void {}
 
 	saveService() {
@@ -74,9 +115,24 @@ export class ServiceEditListComponent implements OnInit {
 				this.serviceTypes.push(result);
 				this.selectedServiceType = result;
 			});
+		this.isAddServiceTypeMode = !this.isAddServiceTypeMode;
 	}
 
-	openEditPage(type) {
-		this.selectedServiceType = type;
+	openEditPage(type: ServiceTypeDto) {
+		if (this.selectedServiceType === null) {
+			this.selectedServiceType = type;
+			this.isViewService = true;
+			this._loadService(type.id);
+		} else if (
+			this.selectedServiceType.id === type.id &&
+			this.isViewService
+		) {
+			this.selectedServiceType = null;
+			this.isViewService = false;
+		} else {
+			this.selectedServiceType = type;
+			this.isViewService = true;
+			this._loadService(type.id);
+		}
 	}
 }

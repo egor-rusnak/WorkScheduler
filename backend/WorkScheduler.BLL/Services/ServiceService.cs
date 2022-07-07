@@ -26,6 +26,12 @@ namespace WorkScheduler.BLL.Services
             return _mapper.Map<IEnumerable<ServiceDto>>(_context.Services);
         }
 
+        public IEnumerable<ServiceDto> GetServicesByType(Guid typeId)
+        {
+            var services = _context.Services.Where(c => c.ServiceTypeId == typeId);
+            return _mapper.Map<IEnumerable<ServiceDto>>(services);
+        }
+
         public CreateServiceTypeDto CreateType(CreateServiceTypeDto serviceTypeDto)
         {
             var serviceType = _mapper.Map<ServiceType>(serviceTypeDto);
@@ -40,6 +46,8 @@ namespace WorkScheduler.BLL.Services
         {
             return _mapper.Map<IEnumerable<ServiceTypeDto>>(_context.ServiceTypes);
         }
+
+
     }
 
 }

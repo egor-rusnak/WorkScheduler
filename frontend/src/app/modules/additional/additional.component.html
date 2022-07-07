@@ -24,6 +24,7 @@
 	<button (click)="isUserShow = true">Clients</button>
 	<button (click)="isServiceShow = true">Services</button>
 </div>
+
 <router-outlet></router-outlet>
 <app-user-edit-list
 	*ngIf="isUserShow"
