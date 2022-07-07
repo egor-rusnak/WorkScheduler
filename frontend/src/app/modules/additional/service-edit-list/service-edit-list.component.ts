@@ -4,30 +4,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { ServiceTypeDto } from '@core/models/service-type-dto';
 import { HttpInternalService } from '@core/services/http-internal.service';
 import { ServiceDto } from '@core/models/service-dto';
-
-export const pullDownAnimation = trigger('pullDownAnimation', [
-	transition(':enter', [
-		style({
-			height: '0',
-			overflow: 'hidden',
-			'border-width': 0,
-			opacity: 0,
-		}),
-		animate(
-			'0.3s',
-			style({ height: '*', 'border-width': '*', opacity: '*' })
-		),
-	]),
-	transition(':leave', [
-		style({
-			height: '*',
-			overflow: 'hidden',
-			'border-width': '*',
-			opacity: '*',
-		}),
-		animate('0.3s', style({ height: '0', 'border-width': 0, opacity: 0 })),
-	]),
-]);
+import { pullDownAnimation } from '@mod/animations';
 
 @Component({
 	selector: 'app-service-edit-list',

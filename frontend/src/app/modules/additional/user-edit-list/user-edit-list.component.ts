@@ -12,7 +12,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { UserDto } from '@core/models/user-dto';
 import {
 	animate,
-	keyframes,
 	state,
 	style,
 	transition,
@@ -23,31 +22,7 @@ import { ElementRef } from '@angular/core';
 import { HttpInternalService } from '@core/services/http-internal.service';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
-import { BaseSlideDownComponent } from '@core/base/components/base-slide-down.component';
-
-export const pullDownAnimation = trigger('pullDownAnimation', [
-	transition(':enter', [
-		style({
-			height: '0',
-			overflow: 'hidden',
-			'border-width': 0,
-			opacity: 0,
-		}),
-		animate(
-			'0.3s',
-			style({ height: '*', 'border-width': '*', opacity: '*' })
-		),
-	]),
-	transition(':leave', [
-		style({
-			height: '*',
-			overflow: 'hidden',
-			'border-width': '*',
-			opacity: '*',
-		}),
-		animate('0.3s', style({ height: '0', 'border-width': 0, opacity: 0 })),
-	]),
-]);
+import { pullDownAnimation } from '@mod/animations';
 
 @Component({
 	selector: 'app-user-edit-list',
