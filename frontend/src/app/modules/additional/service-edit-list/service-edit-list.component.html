@@ -53,6 +53,17 @@
 			</div>
 		</div>
 	</div>
+	<div class="fab-container">
+		<button
+			type="button"
+			class="button iconbutton"
+			(click)="isAddPageShow = true"
+		>
+			+
+		</button>
+		<!-- <input type="button" class="button iconbutton" value="+" /> -->
+	</div>
+
 	<!-- <form [formGroup]="serviceTypeInfoGroup">
 		<div class="list-group">
 			<button
@@ -98,3 +109,9 @@
 		<input type="text" />
 	</app-base-slide-dowm> -->
 </app-base-slide-dowm>
+
+<router-outlet></router-outlet>
+<service-add-to-list
+	*ngIf="isAddPageShow"
+	(closeEmit)="isAddPageShow = false"
+></service-add-to-list>

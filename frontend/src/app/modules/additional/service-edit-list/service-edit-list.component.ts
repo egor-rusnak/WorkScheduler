@@ -48,6 +48,7 @@ export class ServiceEditListComponent implements OnInit {
 	isViewService: boolean = false;
 	showEditPage: boolean = false;
 	isExistsService: boolean = false;
+	isAddPageShow: boolean = false;
 
 	public serviceTypes: ServiceTypeDto[];
 	selectedServiceType: ServiceTypeDto;
