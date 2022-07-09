@@ -28,8 +28,14 @@ namespace WorkScheduler.BLL.Services
 
         public IEnumerable<ServiceDto> GetServicesByType(Guid typeId)
         {
-            var services = _context.Services.Where(c => c.ServiceTypeId == typeId);
+            var services = _context.Services.Where(s => s.ServiceTypeId == typeId);
             return _mapper.Map<IEnumerable<ServiceDto>>(services);
+        }
+
+        public ServiceDto GetService(Guid recordId)
+        {
+            var service = _context.Services.FirstOrDefault(s => s.Id == recordId);
+            return _mapper.Map<ServiceDto>(service);
         }
 
         public CreateServiceTypeDto CreateType(CreateServiceTypeDto serviceTypeDto)
@@ -47,7 +53,40 @@ namespace WorkScheduler.BLL.Services
             return _mapper.Map<IEnumerable<ServiceTypeDto>>(_context.ServiceTypes);
         }
 
+        public CreateServiceDto Update(Guid recordId, CreateServiceDto userDto)
+        {
+            var entity = _context.Services.FirstOrDefault(s => s.Id == recordId);
 
+            ArgumentNullException.ThrowIfNull(entity);
+
+            entity.ServiceTypeId = userDto.ServiceTypeId;
+            entity.Cost = userDto.Cost;
+            entity.DurationTime = userDto.DurationTime;
+            entity.Name = userDto.Name;
+
+            _context.SaveChanges();
+
+            return _mapper.Map<CreateServiceDto>(entity);
+        }
+
+        public CreateServiceTypeDto UpdateType(Guid recordId, CreateServiceTypeDto serviceTypeDto)
+        {
+            var entity = _context.ServiceTypes.FirstOrDefault(st => st.Id == recordId);
+
+            ArgumentNullException.ThrowIfNull(entity);
+
+            entity.Name = serviceTypeDto.Name;
+
+            _context.SaveChanges();
+
+            return _mapper.Map<CreateServiceTypeDto>(entity);
+        }
+
+        public ServiceTypeDto GetServiceType(Guid recordId)
+        {
+            var serviceType = _context.ServiceTypes.FirstOrDefault(st => st.Id == recordId);
+            return _mapper.Map<ServiceTypeDto>(serviceType);
+        }
     }
 
 }

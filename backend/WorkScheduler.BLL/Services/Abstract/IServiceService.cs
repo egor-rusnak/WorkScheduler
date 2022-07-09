@@ -9,5 +9,9 @@ namespace WorkScheduler.BLL.Services.Abstract
         CreateServiceTypeDto CreateType(CreateServiceTypeDto serviceTypeDto);
         IEnumerable<ServiceTypeDto> GetAllServiceTypes();
         IEnumerable<ServiceDto> GetServicesByType(Guid typeId);
+        ServiceDto GetService(Guid recordId);
+        CreateServiceDto Update(Guid recordId, CreateServiceDto userDto);
+        CreateServiceTypeDto UpdateType(Guid recordId, CreateServiceTypeDto serviceTypeDto);
+        ServiceTypeDto GetServiceType(Guid recordId);
     }
 }

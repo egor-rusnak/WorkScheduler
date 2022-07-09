@@ -77,7 +77,7 @@ export class ServiceEditListComponent implements OnInit {
 
 	private _loadServiceTypes() {
 		this.client
-			.getRequest<ServiceTypeDto[]>('Service/Types/GetAllServiceTypes')
+			.getRequest<ServiceTypeDto[]>('Services/Types/GetAllServiceTypes')
 			.subscribe((result) => {
 				this.serviceTypes = result;
 			});
@@ -85,7 +85,7 @@ export class ServiceEditListComponent implements OnInit {
 
 	private _loadService(typeId) {
 		this.client
-			.getRequest<ServiceDto[]>(`Service/GetAllServices/${typeId}`)
+			.getRequest<ServiceDto[]>(`Services/GetAllServices/${typeId}`)
 			.subscribe((result) => {
 				this.services = result;
 			});
@@ -100,7 +100,7 @@ export class ServiceEditListComponent implements OnInit {
 		const serviceTypeId = this.selectedServiceType.id;
 		const model = { name, durationTime, cost, serviceTypeId } as ServiceDto;
 		this.client
-			.postRequest<ServiceTypeDto>('Service/Types/Create', model)
+			.postRequest<ServiceTypeDto>('Services/Types/Create', model)
 			.subscribe((result) => {
 				alert(result.name);
 			});
@@ -111,7 +111,7 @@ export class ServiceEditListComponent implements OnInit {
 		console.log(name);
 		const model = { name } as ServiceTypeDto;
 		this.client
-			.postRequest<ServiceTypeDto>('Service/Types/CreateType', model)
+			.postRequest<ServiceTypeDto>('Services/Types/CreateType', model)
 			.subscribe((result) => {
 				this.serviceTypes.push(result);
 				this.selectedServiceType = result;

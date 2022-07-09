@@ -3,7 +3,7 @@
 		<div class="list-group-item" (click)="openEditPage(type)">
 			<span>{{ type.name }}</span>
 			<button *ngIf="isExistsService" class="arrow-btn">›</button>
-			<!-- <button class="arrow-btn" (click)="showEditPage = true">✎</button> -->
+			<button class="arrow-btn" (click)="showEditPage = true">✎</button>
 			<div *ngIf="isViewService && type.id === selectedServiceType.id">
 				<div class="list-group" *ngFor="let service of services">
 					<div class="list-group-item">
@@ -61,7 +61,6 @@
 		>
 			+
 		</button>
-		<!-- <input type="button" class="button iconbutton" value="+" /> -->
 	</div>
 
 	<!-- <form [formGroup]="serviceTypeInfoGroup">
@@ -111,7 +110,7 @@
 </app-base-slide-dowm>
 
 <router-outlet></router-outlet>
-<service-add-to-list
+<app-service-add-to-list
 	*ngIf="isAddPageShow"
 	(closeEmit)="isAddPageShow = false"
-></service-add-to-list>
+></app-service-add-to-list>
