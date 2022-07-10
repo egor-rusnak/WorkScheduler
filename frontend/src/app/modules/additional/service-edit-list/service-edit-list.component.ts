@@ -55,6 +55,9 @@ export class ServiceEditListComponent implements OnInit {
 
 	public services: ServiceDto[];
 
+	service: ServiceDto;
+	serviceType: ServiceTypeDto;
+
 	constructor(protected client: HttpInternalService) {
 		this._createForms();
 		this.serviceTypes = [] as ServiceTypeDto[];
@@ -135,5 +138,15 @@ export class ServiceEditListComponent implements OnInit {
 			this.isViewService = true;
 			this._loadService(type.id);
 		}
+	}
+
+	onEditServiceTypeClick(type: ServiceTypeDto) {
+		this.serviceType = type;
+		this.isAddPageShow = true;
+	}
+
+	onEditServiceClick(service: ServiceDto) {
+		this.service = service;
+		this.isAddPageShow = true;
 	}
 }

@@ -3,11 +3,19 @@
 		<div class="list-group-item" (click)="openEditPage(type)">
 			<span>{{ type.name }}</span>
 			<button *ngIf="isExistsService" class="arrow-btn">›</button>
-			<button class="arrow-btn" (click)="showEditPage = true">✎</button>
+			<button class="arrow-btn" (click)="onEditServiceTypeClick(type)">
+				✎
+			</button>
 			<div *ngIf="isViewService && type.id === selectedServiceType.id">
 				<div class="list-group" *ngFor="let service of services">
 					<div class="list-group-item">
 						<span>{{ service.name }}</span>
+						<button
+							class="arrow-btn"
+							(click)="onEditServiceClick(service)"
+						>
+							✎
+						</button>
 					</div>
 				</div>
 				<!-- <form [formGroup]="serviceInfoForm">
@@ -113,4 +121,6 @@
 <app-service-add-to-list
 	*ngIf="isAddPageShow"
 	(closeEmit)="isAddPageShow = false"
+	[inputService]="service"
+	[inputServiceType]="serviceType"
 ></app-service-add-to-list>

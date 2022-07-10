@@ -21,7 +21,7 @@ namespace WorkScheduler.API.Controllers
             return _serviceService.Create(userDto);
         }
 
-        [HttpPost("/[controller]/Update")]
+        [HttpPut("/[controller]/Update")]
         public ActionResult<CreateServiceDto> Update(Guid recordId, CreateServiceDto userDto)
         {
             return _serviceService.Update(recordId, userDto);
@@ -45,7 +45,7 @@ namespace WorkScheduler.API.Controllers
             return _serviceService.CreateType(serviceTypeDto);
         }
 
-        [HttpPost("/[controller]/Types/UpdateType")]
+        [HttpPut("/[controller]/Types/UpdateType/{recordId}")]
         public ActionResult<CreateServiceTypeDto> UpdateType(Guid recordId, CreateServiceTypeDto serviceTypeDto)
         {
             return _serviceService.UpdateType(recordId, serviceTypeDto);

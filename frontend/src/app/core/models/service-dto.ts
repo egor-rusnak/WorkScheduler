@@ -3,4 +3,5 @@ export class ServiceDto {
 	durationTime: number;
 	serviceTypeId: string;
 	cost: number;
+	id: string;
 }
