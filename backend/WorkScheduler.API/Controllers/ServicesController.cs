@@ -21,7 +21,7 @@ namespace WorkScheduler.API.Controllers
             return _serviceService.Create(userDto);
         }
 
-        [HttpPut("/[controller]/Update")]
+        [HttpPut("/[controller]/Update/{recordId}")]
         public ActionResult<CreateServiceDto> Update(Guid recordId, CreateServiceDto userDto)
         {
             return _serviceService.Update(recordId, userDto);

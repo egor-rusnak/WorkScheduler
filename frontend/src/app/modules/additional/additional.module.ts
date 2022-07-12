@@ -8,6 +8,7 @@ import { UserEditListComponent } from './user-edit-list/user-edit-list.component
 import { ServiceEditListComponent } from './service-edit-list/service-edit-list.component';
 import { BaseSlideDownComponent } from '@core/base/components/base-slide-down.component';
 import { ServiceAddToListComponent } from './service-edit-list/service-add-to-list/service-add-to-list.component';
+import { UpdateServiceItemComponent } from './service-edit-list/update-service-item/update-service-item.component';
 
 @NgModule({
 	declarations: [
@@ -16,6 +17,7 @@ import { ServiceAddToListComponent } from './service-edit-list/service-add-to-li
 		ServiceEditListComponent,
 		BaseSlideDownComponent,
 		ServiceAddToListComponent,
+		UpdateServiceItemComponent,
 	],
 	imports: [
 		CommonModule,

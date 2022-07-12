@@ -1,4 +1,4 @@
-<div class="example-button-row base-button-block fadeIn">
+<!-- <div class="example-button-row base-button-block fadeIn">
 	<div class="base-font-family"><p>Салон</p></div>
 	<button
 		class="nav-button base-font-family base-button-color"
@@ -18,11 +18,15 @@
 	>
 		Процедури
 	</button>
-</div>
+</div> -->
 <div class="example-button-row base-button-block button-group fadeIn">
-	<button>Employee</button>
-	<button (click)="isUserShow = true">Clients</button>
-	<button (click)="isServiceShow = true">Services</button>
+	<button type="button" class="btn">Employee</button>
+	<button type="button" class="btn" (click)="isUserShow = true">
+		Clients
+	</button>
+	<button type="button" class="btn" (click)="isServiceShow = true">
+		Services
+	</button>
 </div>
 
 <router-outlet></router-outlet>

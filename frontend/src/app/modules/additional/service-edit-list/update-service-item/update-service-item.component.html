@@ -1,4 +1,4 @@
-<app-base-slide-dowm (closeEmit)="this.closeEmit.emit(null)">
+<app-base-slide-dowm (closeEmit)="cancel()">
 	<form [formGroup]="serviceGroup">
 		<div>
 			<label for="serviceType">Service type</label>
@@ -6,7 +6,6 @@
 				formControlName="serviceType"
 				class="form-control"
 				id="serviceType"
-				(change)="onSelectedServiceType($event.target.value)"
 			>
 				<option [value]="null">Without selected type</option>
 				<option *ngFor="let type of servicesTypes" [value]="type.id">

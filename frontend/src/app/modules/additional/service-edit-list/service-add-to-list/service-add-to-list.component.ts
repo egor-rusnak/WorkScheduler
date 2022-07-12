@@ -19,68 +19,34 @@ import { HttpInternalService } from '@core/services/http-internal.service';
 export class ServiceAddToListComponent implements OnInit {
 	@Output() closeEmit = new EventEmitter();
 	serviceGroup: FormGroup;
-	selectedServiceType: ServiceTypeDto;
+	selectedServiceType: string;
 	isShowInputFieldsForService: boolean = false;
 
 	public servicesTypes: ServiceTypeDto[];
 
-	@Input() inputService: ServiceDto;
-	@Input() inputServiceType: ServiceTypeDto;
-
 	constructor(protected client: HttpInternalService) {
-		this._createDefaultServiceGroup();
 		this.selectedServiceType = null;
 		this.servicesTypes = [] as ServiceTypeDto[];
 		this._loadServiceTypes();
 	}
 
 	ngOnInit(): void {
-		this.getServiceType();
-		this.selectedServiceType = {
-			id: 'e24a9c1c-427e-49bd-9c15-445de0eaf04a',
-			name: 'Маникюршица',
-		};
+		this._createDefaultServiceGroup();
 	}
 
 	_createDefaultServiceGroup() {
 		this.serviceGroup = new FormGroup({
 			serviceType: new FormControl(null),
-			//this.inputService != null ? this.getServiceType() : null
-			serviceTypeName: new FormControl(
-				this.inputServiceType != null
-					? this.inputServiceType.name
-					: null
-			),
-			serviceName: new FormControl(
-				this.inputService != null ? this.inputService.name : null
-			),
-			durationTime: new FormControl(
-				this.inputService != null
-					? this.inputService.durationTime
-					: null
-			),
-			cost: new FormControl(
-				this.inputService != null ? this.inputService.cost : null
-			),
+			serviceTypeName: new FormControl(null),
+			serviceName: new FormControl(null),
+			durationTime: new FormControl(null),
+			cost: new FormControl(null),
 		});
-	}
-
-	getServiceType() {
-		if (this.inputService == null) {
-			return null;
-		}
-		this.getSingleServiceType(this.inputService.serviceTypeId);
-	}
-
-	getSingleServiceType(recordId) {
-		this.client
-			.getRequest<ServiceTypeDto>(
-				`Services/Types/GetServiceType/${recordId}`
-			)
-			.subscribe((result) => {
-				this.serviceGroup.get('serviceType').patchValue(result);
-				this.selectedServiceType = result;
-			});
+		this.serviceGroup.controls.serviceType.valueChanges.subscribe(
+			(result) => {
+				this.isShowInputFieldsForService = result != null;
+			}
+		);
 	}
 
 	private _loadServiceTypes() {
@@ -91,18 +57,14 @@ export class ServiceAddToListComponent implements OnInit {
 			});
 	}
 
-	onSelectedServiceType(event: any) {
-		this.isShowInputFieldsForService = this.selectedServiceType != null;
+	onSelectedServiceType(value: any) {
+		this.isShowInputFieldsForService = value != 'null';
+		this.selectedServiceType = value;
 	}
 
 	save() {
-		if (this.selectedServiceType == null && this.inputServiceType == null) {
+		if (this.selectedServiceType == 'null') {
 			this.saveServiceType();
-		} else if (
-			this.selectedServiceType == null &&
-			this.inputServiceType !== null
-		) {
-			this.updateServiceType();
 		} else {
 			this.saveService();
 		}
@@ -116,7 +78,7 @@ export class ServiceAddToListComponent implements OnInit {
 		const name = this.serviceGroup.get('serviceName').value;
 		const durationTime = this.serviceGroup.get('durationTime').value;
 		const cost = this.serviceGroup.get('cost').value;
-		const serviceTypeId = this.selectedServiceType.id;
+		const serviceTypeId = this.serviceGroup.get('serviceType').value;
 		const model = { name, durationTime, cost, serviceTypeId } as ServiceDto;
 		this.client
 			.postRequest<ServiceTypeDto>('Service/Create', model)
@@ -131,34 +93,6 @@ export class ServiceAddToListComponent implements OnInit {
 			.postRequest<ServiceTypeDto>('Services/Types/CreateType', {
 				name,
 			} as ServiceTypeDto)
-			.subscribe((result) => {
-				this.closeEmit.emit(null);
-			});
-	}
-
-	updateServiceType() {
-		const name = this.serviceGroup.get('serviceTypeName').value;
-		this.client
-			.putRequest<ServiceTypeDto>(
-				`Services/Types/UpdateType/${this.inputServiceType.id}`,
-				{ name } as ServiceTypeDto
-			)
-			.subscribe((result) => {
-				this.closeEmit.emit(null);
-			});
-	}
-
-	updateService() {
-		const name = this.serviceGroup.get('serviceName').value;
-		const durationTime = this.serviceGroup.get('durationTime').value;
-		const cost = this.serviceGroup.get('cost').value;
-		const serviceTypeId = this.selectedServiceType.id;
-		const model = { name, durationTime, cost, serviceTypeId } as ServiceDto;
-		this.client
-			.putRequest<ServiceDto>(
-				`Services/Types/Update/${this.inputService.id}`,
-				{ model }
-			)
 			.subscribe((result) => {
 				this.closeEmit.emit(null);
 			});

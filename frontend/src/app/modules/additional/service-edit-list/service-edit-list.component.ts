@@ -49,6 +49,7 @@ export class ServiceEditListComponent implements OnInit {
 	showEditPage: boolean = false;
 	isExistsService: boolean = false;
 	isAddPageShow: boolean = false;
+	isUpdatePageShow: boolean = false;
 
 	public serviceTypes: ServiceTypeDto[];
 	selectedServiceType: ServiceTypeDto;
@@ -142,11 +143,13 @@ export class ServiceEditListComponent implements OnInit {
 
 	onEditServiceTypeClick(type: ServiceTypeDto) {
 		this.serviceType = type;
-		this.isAddPageShow = true;
+		this.service = null;
+		this.isUpdatePageShow = true;
 	}
 
 	onEditServiceClick(service: ServiceDto) {
 		this.service = service;
-		this.isAddPageShow = true;
+		this.serviceType = null;
+		this.isUpdatePageShow = true;
 	}
 }

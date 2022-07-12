@@ -121,6 +121,10 @@
 <app-service-add-to-list
 	*ngIf="isAddPageShow"
 	(closeEmit)="isAddPageShow = false"
+></app-service-add-to-list>
+<app-update-service-item
+	*ngIf="isUpdatePageShow"
+	(closeEmit)="isUpdatePageShow = false"
 	[inputService]="service"
 	[inputServiceType]="serviceType"
-></app-service-add-to-list>
+></app-update-service-item>
