@@ -69,6 +69,17 @@ namespace WorkScheduler.BLL.Services
             return _mapper.Map<CreateServiceDto>(entity);
         }
 
+        public void DeleteService(Guid recordId)
+        {
+            var entity = _context.Services.FirstOrDefault(s => s.Id == recordId);
+
+            if (entity != null)
+            {
+                _context.Remove(entity);
+                _context.SaveChanges();
+            }
+        }
+
         public CreateServiceTypeDto UpdateType(Guid recordId, CreateServiceTypeDto serviceTypeDto)
         {
             var entity = _context.ServiceTypes.FirstOrDefault(st => st.Id == recordId);
@@ -86,6 +97,17 @@ namespace WorkScheduler.BLL.Services
         {
             var serviceType = _context.ServiceTypes.FirstOrDefault(st => st.Id == recordId);
             return _mapper.Map<ServiceTypeDto>(serviceType);
+        }
+
+        public void DeleteServiceType(Guid recordId)
+        {
+            var entity = _context.ServiceTypes.FirstOrDefault(s => s.Id == recordId);
+
+            if (entity != null)
+            {
+                _context.Remove(entity);
+                _context.SaveChanges();
+            }
         }
     }
 

@@ -39,6 +39,12 @@ namespace WorkScheduler.API.Controllers
             return Ok(_serviceService.GetService(recordId));
         }
 
+        [HttpDelete("/[controller]/Delete/{recordId}")]
+        public void Delete(Guid recordId)
+        {
+            _serviceService.DeleteService(recordId);
+        }
+
         [HttpPost("/[controller]/Types/CreateType")]
         public ActionResult<CreateServiceTypeDto> CreateType(CreateServiceTypeDto serviceTypeDto)
         {
@@ -61,6 +67,12 @@ namespace WorkScheduler.API.Controllers
         public ActionResult<ServiceTypeDto> GetServiceType(Guid recordId)
         {
             return Ok(_serviceService.GetServiceType(recordId));
+        }
+
+        [HttpDelete("/[controller]/Types/Delete/{recordId}")]
+        public void DeleteType(Guid recordId)
+        {
+            _serviceService.DeleteServiceType(recordId);
         }
     }
 }

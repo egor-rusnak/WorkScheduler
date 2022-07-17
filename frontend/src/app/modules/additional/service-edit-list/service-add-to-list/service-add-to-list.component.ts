@@ -63,7 +63,8 @@ export class ServiceAddToListComponent implements OnInit {
 	}
 
 	save() {
-		if (this.selectedServiceType == 'null') {
+		const serviceType = this.serviceGroup.get('serviceType').value;
+		if (serviceType == null) {
 			this.saveServiceType();
 		} else {
 			this.saveService();
@@ -81,7 +82,7 @@ export class ServiceAddToListComponent implements OnInit {
 		const serviceTypeId = this.serviceGroup.get('serviceType').value;
 		const model = { name, durationTime, cost, serviceTypeId } as ServiceDto;
 		this.client
-			.postRequest<ServiceTypeDto>('Service/Create', model)
+			.postRequest<ServiceTypeDto>('Services/Create', model)
 			.subscribe((result) => {
 				this.closeEmit.emit(null);
 			});

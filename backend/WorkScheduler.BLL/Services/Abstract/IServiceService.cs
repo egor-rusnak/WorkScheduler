@@ -13,5 +13,7 @@ namespace WorkScheduler.BLL.Services.Abstract
         CreateServiceDto Update(Guid recordId, CreateServiceDto userDto);
         CreateServiceTypeDto UpdateType(Guid recordId, CreateServiceTypeDto serviceTypeDto);
         ServiceTypeDto GetServiceType(Guid recordId);
+        void DeleteService(Guid recordId);
+        void DeleteServiceType(Guid recordId);
     }
 }

@@ -152,4 +152,18 @@ export class ServiceEditListComponent implements OnInit {
 		this.serviceType = null;
 		this.isUpdatePageShow = true;
 	}
+
+	onDeleteServiceTypeClick(typeId: string) {
+		this.client
+			.deleteRequest(`Services/Types/Delete/${typeId}`, null)
+			.subscribe((result) => {
+				this._loadServiceTypes();
+			});
+	}
+
+	onDeleteServiceClick(serviceId: string) {
+		this.client
+			.deleteRequest(`Services/Delete/${serviceId}`, null)
+			.subscribe((result) => {});
+	}
 }

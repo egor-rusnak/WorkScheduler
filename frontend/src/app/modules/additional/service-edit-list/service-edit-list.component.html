@@ -3,19 +3,30 @@
 		<div class="list-group-item" (click)="openEditPage(type)">
 			<span>{{ type.name }}</span>
 			<button *ngIf="isExistsService" class="arrow-btn">›</button>
-			<button class="arrow-btn" (click)="onEditServiceTypeClick(type)">
-				✎
-			</button>
+			<div class="button-in-grid">
+				<button (click)="onDeleteServiceTypeClick(type.id)">🗑</button>
+				<button
+					class="arrow-btn"
+					(click)="onEditServiceTypeClick(type)"
+				>
+					✎
+				</button>
+			</div>
 			<div *ngIf="isViewService && type.id === selectedServiceType.id">
 				<div class="list-group" *ngFor="let service of services">
 					<div class="list-group-item">
 						<span>{{ service.name }}</span>
-						<button
-							class="arrow-btn"
-							(click)="onEditServiceClick(service)"
-						>
-							✎
-						</button>
+						<div>
+							<button (click)="onDeleteServiceClick(service.id)">
+								🗑
+							</button>
+							<button
+								class="arrow-btn"
+								(click)="onEditServiceClick(service)"
+							>
+								✎
+							</button>
+						</div>
 					</div>
 				</div>
 				<!-- <form [formGroup]="serviceInfoForm">

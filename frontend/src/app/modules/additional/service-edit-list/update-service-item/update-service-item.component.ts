@@ -76,7 +76,10 @@ export class UpdateServiceItemComponent implements OnInit {
 		});
 		this.serviceGroup.controls.serviceType.valueChanges.subscribe(
 			(result) => {
-				this.isShowInputFieldsForService = result != null;
+				this.isShowInputFieldsForService = result != 'null';
+				if (result == 'null') {
+					this.setServiceTypeNameByServiceName();
+				}
 			}
 		);
 	}
@@ -86,9 +89,19 @@ export class UpdateServiceItemComponent implements OnInit {
 		this.isShowInputFieldsForService = serviceType != null;
 	}
 
+	setServiceTypeNameByServiceName() {
+		const serviceName = this.serviceGroup.get('serviceName').value;
+		this.serviceGroup.get('serviceTypeName').patchValue(serviceName);
+	}
+
 	save() {
 		const serviceType = this.serviceGroup.get('serviceType').value;
-		if (serviceType == null) {
+		if (
+			(serviceType == null || serviceType == 'null') &&
+			this.inputServiceType == null
+		) {
+			this.deleteService();
+		} else if (serviceType == null || serviceType == 'null') {
 			this.updateServiceType();
 		} else {
 			this.updateService();
@@ -120,11 +133,31 @@ export class UpdateServiceItemComponent implements OnInit {
 		const serviceTypeId = this.serviceGroup.get('serviceType').value;
 		const model = { name, durationTime, cost, serviceTypeId } as ServiceDto;
 		this.client
-			.putRequest<ServiceDto>(`Services/Update/${this.inputService.id}`, {
-				model,
-			})
+			.putRequest<ServiceDto>(
+				`Services/Update/${this.inputService.id}`,
+				model
+			)
 			.subscribe((result) => {
 				this._setDefaultValuesInInputParams();
+				this.closeEmit.emit(null);
+			});
+	}
+
+	deleteService() {
+		this.client
+			.deleteRequest(`Services/Delete/${this.inputService.id}`, null)
+			.subscribe((result) => {
+				this.saveServiceType();
+			});
+	}
+
+	saveServiceType() {
+		const name = this.serviceGroup.get('serviceTypeName').value;
+		this.client
+			.postRequest<ServiceTypeDto>('Services/Types/CreateType', {
+				name,
+			} as ServiceTypeDto)
+			.subscribe((result) => {
 				this.closeEmit.emit(null);
 			});
 	}
