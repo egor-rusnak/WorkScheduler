@@ -6,6 +6,6 @@ export class SampleService {
 	constructor(protected client: HttpInternalService) {}
 
 	public getAnswer() {
-		return this.client.getRequestString('Index');
+		return this.client.getRequestString('Users/Index');
 	}
 }

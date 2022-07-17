@@ -1,0 +1,16 @@
+<div class="time-table">
+	<div
+		(mousedown)="touchStart($event, time.index)"
+		(touchmove)="touch($event, time.index)"
+		(mouseup)="touchEnd($event, time.index)"
+		(mousemove)="touch($event, time.index)"
+		*ngFor="let time of timedRows"
+	>
+		<div>
+			{{ time.time }}
+			<span *ngIf="this.checkIsInSelection(time.index) || time.billed">
+				Selected
+			</span>
+		</div>
+	</div>
+</div>

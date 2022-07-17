@@ -1,0 +1,208 @@
+.input-fields {
+	width: 100%;
+	display: block;
+	border: 2em solid #f7f7f7;
+	border-radius: 1em;
+	box-shadow: 0px 0px 8px 1px #dddbdb;
+}
+
+.btnColor {
+	background-color: #aaae7f;
+}
+
+.closebtn {
+	margin-left: 15px;
+	color: white;
+	font-weight: bold;
+	float: right;
+	font-size: 25px;
+	line-height: 20px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.example-full-width {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.save-btn {
+	width: 100%;
+	display: block;
+}
+.form {
+	background-color: rgb(124, 124, 124);
+}
+table {
+	width: 100%;
+}
+
+tr.example-detail-row {
+	height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+	background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+	background: #efefef;
+}
+
+.example-element-row td {
+	border-bottom-width: 0;
+}
+
+.example-element-detail {
+	overflow: hidden;
+	display: flex;
+}
+
+.example-element-diagram {
+	min-width: 80px;
+	border: 2px solid black;
+	padding: 8px;
+	font-weight: lighter;
+	margin: 8px 0;
+	height: 104px;
+}
+
+.example-element-symbol {
+	font-weight: bold;
+	font-size: 40px;
+	line-height: normal;
+}
+
+.example-element-description {
+	padding: 16px;
+}
+
+.example-element-description-attribution {
+	opacity: 0.5;
+}
+
+section {
+	display: table;
+}
+
+.example-label {
+	display: table-cell;
+	font-size: 14px;
+	margin-left: 8px;
+	min-width: 120px;
+}
+
+.example-button-row {
+	display: table-cell;
+	width: 490px;
+}
+
+.example-button-row .mat-button-base {
+	margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.example-button-container {
+	display: flex;
+	justify-content: center;
+	width: 120px;
+}
+
+.fadeIn {
+	animation-name: fadeIn;
+	-webkit-animation-name: fadeIn;
+
+	animation-duration: 0.4s;
+	-webkit-animation-duration: 0.4s;
+
+	animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: ease-in-out;
+
+	visibility: visible !important;
+}
+
+@keyframes fadeIn {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.fadeOut {
+	animation-name: fadeOut;
+	-webkit-animation-name: fadeOut;
+
+	animation-duration: 0.4s;
+	-webkit-animation-duration: 0.4s;
+
+	animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: ease-in-out;
+
+	visibility: visible !important;
+}
+
+@keyframes fadeOut {
+	100% {
+		transform: scale(0);
+		opacity: 1;
+	}
+	0% {
+		transform: scale(1);
+		opacity: 0;
+	}
+}
+
+.pulse {
+	-webkit-animation: 0.5s tremor ease-out infinite;
+	animation: 0.5s tremor ease-out infinite;
+}
+
+.pullUp {
+	animation-name: pullUp;
+
+	animation-duration: 0.2s;
+
+	animation-timing-function: ease-out;
+
+	transform-origin: 50% 0%;
+}
+
+@keyframes pullUp {
+	0% {
+		transform: scaleY(1);
+	}
+	100% {
+		transform: scaleY(0);
+	}
+}
+
+.pullDown {
+	animation-name: pullDown;
+
+	animation-duration: 0.5s;
+
+	animation-timing-function: ease-out;
+
+	transform-origin: 50% 0%;
+}
+
+@keyframes pullDown {
+	0% {
+		transform: scaleY(0.1);
+	}
+	50% {
+		transform: scaleY(1.05);
+	}
+	100% {
+		transform: scaleY(1);
+	}
+}

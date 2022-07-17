@@ -1,0 +1,32 @@
+<form
+	@leftSlideAbsoluteAnimation
+	@hideBlockAnimation
+	class="modal-schedule"
+	action=""
+>
+	<div class="field">
+		<label>Time</label>
+		<input class="form-control" />
+	</div>
+	<div class="field">
+		<label>Date</label>
+		<input class="form-control" />
+	</div>
+	<hr />
+	<div class="field">
+		<label>Employee</label>
+		<select class="form-control">
+			<option>Empl1</option>
+		</select>
+	</div>
+	<div class="field">
+		<label>Client</label>
+		<select class="form-control">
+			<option>Cl1</option>
+		</select>
+	</div>
+	<div class="action-block">
+		<button (click)="close($event)">Save</button>
+		<button (click)="close($event)">Close</button>
+	</div>
+</form>

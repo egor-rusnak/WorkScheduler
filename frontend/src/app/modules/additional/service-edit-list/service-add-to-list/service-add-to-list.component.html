@@ -1,0 +1,86 @@
+<app-base-slide-dowm (closeEmit)="this.closeEmit.emit(null)">
+	<form [formGroup]="serviceGroup">
+		<div>
+			<label for="serviceType">Service type</label>
+			<select
+				formControlName="serviceType"
+				class="form-control"
+				id="serviceType"
+				(change)="onSelectedServiceType($event.target.value)"
+			>
+				<option [value]="null">Without selected type</option>
+				<option *ngFor="let type of servicesTypes" [value]="type.id">
+					{{ type.name }}
+				</option>
+			</select>
+		</div>
+		<hr />
+		<div *ngIf="!isShowInputFieldsForService">
+			<div class="form-group">
+				<label for="serviceTypeNameInput">Service type name...</label>
+				<input
+					type="text"
+					class="form-control"
+					id="serviceTypeNameInput"
+					aria-describedby="serviceTypeNameInputHelp"
+					placeholder="Enter service type name..."
+					formControlName="serviceTypeName"
+				/>
+				<small
+					id="serviceTypeNameInputHelp"
+					class="form-text text-muted"
+					>Service type will be added</small
+				>
+			</div>
+		</div>
+		<div *ngIf="isShowInputFieldsForService">
+			<div class="form-group">
+				<label for="serviceNameInput">Service name</label>
+				<input
+					type="text"
+					class="form-control"
+					id="serviceNameInput"
+					placeholder="Enter service name..."
+					formControlName="serviceName"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="durationTimeInput">Duration time</label>
+				<input
+					type="number"
+					class="form-control"
+					id="durationTimeInput"
+					placeholder="Enter duration time..."
+					formControlName="durationTime"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="costInput">Cost</label>
+				<input
+					type="number"
+					class="form-control"
+					id="costInput"
+					placeholder="Enter cost..."
+					formControlName="cost"
+				/>
+			</div>
+		</div>
+		<hr />
+		<div class="container">
+			<button
+				type="button"
+				class="btn btn-outline-success btn-block"
+				(click)="save()"
+			>
+				Save
+			</button>
+			<button
+				type="button"
+				class="btn btn-outline-danger btn-block"
+				(click)="cancel()"
+			>
+				Cancel
+			</button>
+		</div>
+	</form>
+</app-base-slide-dowm>

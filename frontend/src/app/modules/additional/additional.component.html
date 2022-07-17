@@ -1,1 +1,40 @@
-<h1>LOL!</h1>
+<!-- <div class="example-button-row base-button-block fadeIn">
+	<div class="base-font-family"><p>Салон</p></div>
+	<button
+		class="nav-button base-font-family base-button-color"
+		routerLink="employees"
+	>
+		Сотрудники
+	</button>
+	<button
+		class="nav-button base-font-family base-button-color"
+		(click)="isUserShow = true"
+	>
+		Клиенты
+	</button>
+	<button
+		class="nav-button base-font-family base-button-color"
+		(click)="isServiceShow = true"
+	>
+		Процедури
+	</button>
+</div> -->
+<div class="example-button-row base-button-block button-group fadeIn">
+	<button type="button" class="btn">Employee</button>
+	<button type="button" class="btn" (click)="isUserShow = true">
+		Clients
+	</button>
+	<button type="button" class="btn" (click)="isServiceShow = true">
+		Services
+	</button>
+</div>
+
+<router-outlet></router-outlet>
+<app-user-edit-list
+	*ngIf="isUserShow"
+	(closeEmit)="isUserShow = false"
+></app-user-edit-list>
+<app-service-edit-list
+	*ngIf="isServiceShow"
+	(closeEmit)="isServiceShow = false"
+></app-service-edit-list>

@@ -1,0 +1,141 @@
+<app-base-slide-dowm (closeEmit)="this.closeEmit.emit(null)">
+	<div class="list-group" *ngFor="let type of serviceTypes">
+		<div class="list-group-item" (click)="openEditPage(type)">
+			<span>{{ type.name }}</span>
+			<button *ngIf="isExistsService" class="arrow-btn">›</button>
+			<div class="button-in-grid">
+				<button (click)="onDeleteServiceTypeClick(type.id)">🗑</button>
+				<button
+					class="arrow-btn"
+					(click)="onEditServiceTypeClick(type)"
+				>
+					✎
+				</button>
+			</div>
+			<div *ngIf="isViewService && type.id === selectedServiceType.id">
+				<div class="list-group" *ngFor="let service of services">
+					<div class="list-group-item">
+						<span>{{ service.name }}</span>
+						<div>
+							<button (click)="onDeleteServiceClick(service.id)">
+								🗑
+							</button>
+							<button
+								class="arrow-btn"
+								(click)="onEditServiceClick(service)"
+							>
+								✎
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- <form [formGroup]="serviceInfoForm">
+					<div>
+						<button
+							class="list-group-item"
+							(click)="isAddServiceMode = !isAddServiceMode"
+						>
+							{{ !isAddServiceMode ? "Add new..." : "Cancel" }}
+						</button>
+					</div>
+					<div
+						class="add-new-item-to-list"
+						*ngIf="isAddServiceMode"
+						@pullDownAnimation
+					>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input
+									type="text"
+									class="form-control"
+									id="formGroupNameInput"
+									autocomplete="off"
+									autofocus
+									required
+								/>
+								<label class="floating-label">Name</label>
+							</div>
+						</div>
+						<div class="example-full-width">
+							<label>Duration time</label>
+							<input
+								type="number"
+								formControlName="durationTime"
+							/>
+						</div>
+						<div class="example-full-width">
+							<label>Cost</label>
+							<input type="number" formControlName="cost" />
+						</div>
+					</div>
+				</form> -->
+			</div>
+		</div>
+	</div>
+	<div class="fab-container">
+		<button
+			type="button"
+			class="button iconbutton"
+			(click)="isAddPageShow = true"
+		>
+			+
+		</button>
+	</div>
+
+	<!-- <form [formGroup]="serviceTypeInfoGroup">
+		<div class="list-group">
+			<button
+				class="list-group-item"
+				(click)="isAddServiceTypeMode = !isAddServiceTypeMode"
+			>
+				{{ !isAddServiceTypeMode ? "Add new..." : "Cancel" }}
+			</button>
+		</div>
+		<div
+			class="input-group mb-3 add-new-item-to-list"
+			*ngIf="isAddServiceTypeMode"
+			@pullDownAnimation
+		>
+			<div class="floating-label-group input-group mb-3">
+				<input
+					type="text"
+					class="form-control"
+					aria-describedby="add-service-type-button"
+					autofocus
+					required
+					autocomplete="off"
+					formControlName="name"
+				/>
+				<label class="floating-label">Name</label>
+				<div class="input-group-append">
+					<button
+						class="btn btn-outline-secondary"
+						type="button"
+						id="add-service-type-button"
+						(click)="saveServiceType()"
+					>
+						Save
+					</button>
+				</div>
+			</div>
+		</div>
+	</form> -->
+	<!-- <app-base-slide-dowm
+		*ngIf="showEditPage"
+		(closeEmit)="showEditPage = false"
+	>
+		<input type="text" />
+	</app-base-slide-dowm> -->
+</app-base-slide-dowm>
+
+<router-outlet></router-outlet>
+<app-service-add-to-list
+	*ngIf="isAddPageShow"
+	(closeEmit)="isAddPageShow = false"
+></app-service-add-to-list>
+<app-update-service-item
+	*ngIf="isUpdatePageShow"
+	(closeEmit)="isUpdatePageShow = false"
+	[inputService]="service"
+	[inputServiceType]="serviceType"
+></app-update-service-item>
